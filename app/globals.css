@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  /* Backgrounds */
+  --bg-primary: #070a09;
+  --bg-secondary: #0c222d;
+  --bg-card: #1f3530;
+  --bg-elevated: #1a3f4d;
+
+  /* Text Colors */
+  --text-primary: #b49e77;
+  --text-secondary: #729487;
+  --text-muted: #63838d;
+
+  /* Accent Colors */
+  --accent-primary: #8c3e05;
+  --accent-secondary: #563116;
+  --accent-warm: #b49e77;
+
+  /* Borders */
+  --border-default: #495d50;
+  --border-focus: #729487;
+
+  /* Legacy support */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
+
+@theme {
+  --color-cinematic-deep-black: #070a09; /* Primary background */
+  --color-cinematic-midnight-blue: #0c222d; /* Secondary background */
+  --color-cinematic-forest-green: #1f3530; /* Card background */
+  --color-cinematic-teal-dark: #1a3f4d; /* Elevated surfaces */
+
+  --color-cinematic-warm-beige: #b49e77; /* Primary text */
+  --color-cinematic-sage-green: #729487; /* Secondary text */
+  --color-cinematic-muted-blue: #63838d; /* Placeholder/low emphasis text */
+
+  --color-cinematic-rust-orange: #8c3e05; /* Primary accent/buttons */
+  --color-cinematic-dark-brown: #563116; /* Secondary accent/hover */
+
+  --color-cinematic-border-green: #495d50; /* Default borders */
+  --color-cinematic-border-sage: #729487; /* Focus borders */
+
+  --color-semantic-background-primary: #070a09; /* Primary background */
+  --color-semantic-background-secondary: #0c222d; /* Secondary background */
+  --color-semantic-background-card: #1f3530; /* Card background */
+  --color-semantic-background-elevated: #1a3f4d; /* Elevated surfaces */
+
+  --color-semantic-text-primary: #b49e77; /* Primary text */
+  --color-semantic-text-secondary: #729487; /* Secondary text */
+  --color-semantic-text-muted: #63838d; /* Placeholder/low emphasis text */
+
+  --color-semantic-accent-primary: #8c3e05; /* Primary accent/buttons */
+  --color-semantic-accent-secondary: #563116; /* Secondary accent/hover */
+  --color-semantic-accent-warm: #b49e77; /* Warm highlight */
+
+  --color-semantic-border-default: #495d50; /* Default borders */
+  --color-semantic-border-focus: #729487; /* Focus/highlight borders */
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+}
