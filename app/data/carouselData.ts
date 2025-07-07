@@ -1,4 +1,4 @@
-import { CarouselItem } from "../components/Carousel";
+import { CarouselItem } from "../components/ui/Carousel";
 
 export const dummyCarouselItems: CarouselItem[] = [
   {
@@ -29,12 +29,13 @@ export const dummyCarouselItems: CarouselItem[] = [
     description:
       "A computer programmer is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix.",
   },
-  // {
-  //   id: '5',
-  //   title: 'Pulp Fiction',
-  //   image: 'https://image.tmdb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
-  //   description: 'The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption in this Quentin Tarantino masterpiece.'
-  // },
+  {
+    id: "5",
+    title: "Pulp Fiction",
+    image: "https://image.tmdb.org/t/p/w1280/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+    description:
+      "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption in this Quentin Tarantino masterpiece.",
+  },
   {
     id: "6",
     title: "The Godfather",

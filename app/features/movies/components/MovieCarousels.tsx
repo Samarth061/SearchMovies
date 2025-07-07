@@ -1,9 +1,9 @@
-import Carousel from "../components/Carousel";
+import Carousel from "../../../components/ui/Carousel";
 import {
   dummyCarouselItems,
   actionMovieCarousel,
   fallbackCarouselItems,
-} from "../data/carouselData";
+} from "../../../data/carouselData";
 
 export function FeaturedMoviesCarousel() {
   return (
