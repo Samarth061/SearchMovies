@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`flex flex-col h-screen ${geistSans.variable} ${geistMono.variable}`}
       >
         <Header />
-        <main className="flex-1 flex overflow-hidden">{children}</main>
+        <main className="flex-1 overflow-auto">{children}</main>
         <Footer />
       </body>
     </html>

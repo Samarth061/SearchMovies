@@ -18,6 +18,12 @@ interface CarouselProps {
   className?: string;
   height?: string;
   width?: string;
+  customDimensions?: {
+    width?: string;
+    height?: string;
+    maxWidth?: string;
+    maxHeight?: string;
+  };
 }
 
 export default function Carousel({
@@ -29,6 +35,7 @@ export default function Carousel({
   className = "",
   height = "h-56 md:h-96",
   width = "w-full",
+  customDimensions,
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -57,20 +64,40 @@ export default function Carousel({
 
   if (!items || items.length === 0) {
     return (
-      <div className={`flex items-center justify-center ${height} bg-semantic-background-card rounded-lg`}>
+      <div
+        className={`flex items-center justify-center ${height} bg-semantic-background-card rounded-lg`}
+      >
         <p className="text-semantic-text-muted">No items to display</p>
       </div>
     );
   }
 
+  const containerStyles = customDimensions
+    ? {
+        width: customDimensions.width || width,
+        height: customDimensions.height || height,
+        maxWidth: customDimensions.maxWidth,
+        maxHeight: customDimensions.maxHeight,
+      }
+    : {};
+
+  const containerClasses = customDimensions
+    ? `relative ${className}`
+    : `relative ${width} ${className}`;
+
   return (
     <div
-      className={`relative ${width} ${className}`}
+      className={containerClasses}
+      style={customDimensions ? containerStyles : {}}
       role="region"
       aria-label="Featured content carousel"
     >
       {/* Carousel wrapper */}
-      <div className={`relative ${height} overflow-hidden rounded-lg bg-semantic-background-card`}>
+      <div
+        className={`relative ${
+          customDimensions ? "h-full" : height
+        } overflow-hidden rounded-lg bg-semantic-background-card`}
+      >
         {items.map((item, index) => (
           <div
             key={item.id}
@@ -82,14 +109,15 @@ export default function Carousel({
             <img
               src={item.image}
               alt={item.title}
-              className="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              className="absolute block w-full h-full object-cover -translate-x-1/2 top-0 left-1/2"
+              style={{ objectPosition: "center 5%" }}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = "/placeholder-movie.jpg";
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/80 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
+            <div className="absolute bottom-6 left-16 right-16">
               <h3 className="text-xl md:text-2xl font-bold text-semantic-text-primary mb-2">
                 {item.title}
               </h3>
@@ -105,7 +133,7 @@ export default function Carousel({
 
       {/* Slider indicators */}
       {showIndicators && items.length > 1 && (
-        <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
+        <div className="absolute z-30 flex -translate-x-1/2 bottom-1 left-1/2 space-x-3">
           {items.map((_, index) => (
             <button
               key={index}
