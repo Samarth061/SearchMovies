@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Mode Palette</title>
+    <style>
+      :root {
+        /* Backgrounds */
+        --bg-primary: #070a09;
+        --bg-secondary: #0c222d;
+        --bg-card: #1f3530;
+        --bg-elevated: #1a3f4d;
+
+        /* Text Colors */
+        --text-primary: #b49e77;
+        --text-secondary: #729487;
+        --text-muted: #63838d;
+
+        /* Accent Colors */
+        --accent-primary: #8c3e05;
+        --accent-secondary: #563116;
+        --accent-warm: #b49e77;
+
+        /* Borders */
+        --border-default: #495d50;
+        --border-focus: #729487;
+      }
+
+      body {
+        font-family: sans-serif;
+        background: #0b0b0c;
+        color: #e0e0e0;
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      h2 {
+        margin-top: 3rem;
+        font-size: 1.4rem;
+        color: #ffffffcc;
+        border-bottom: 1px solid #ffffff22;
+        padding-bottom: 0.5rem;
+      }
+
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .swatch {
+        border-radius: 8px;
+        height: 100px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .label {
+        margin-top: 0.3rem;
+        font-weight: bold;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎨 Dark Mode Color Palette</h1>
+
+    <h2>Backgrounds</h2>
+    <div class="palette">
+      <div class="swatch" style="background: var(--bg-primary)">
+        <div>#070a09</div>
+        <div class="label">bg-primary</div>
+      </div>
+      <div class="swatch" style="background: var(--bg-secondary)">
+        <div>#0c222d</div>
+        <div class="label">bg-secondary</div>
+      </div>
+      <div class="swatch" style="background: var(--bg-card)">
+        <div>#1f3530</div>
+        <div class="label">bg-card</div>
+      </div>
+      <div class="swatch" style="background: var(--bg-elevated)">
+        <div>#1a3f4d</div>
+        <div class="label">bg-elevated</div>
+      </div>
+    </div>
+
+    <h2>Text</h2>
+    <div class="palette">
+      <div class="swatch" style="background: var(--text-primary); color: black">
+        <div>#b49e77</div>
+        <div class="label">text-primary</div>
+      </div>
+      <div class="swatch" style="background: var(--text-secondary)">
+        <div>#729487</div>
+        <div class="label">text-secondary</div>
+      </div>
+      <div class="swatch" style="background: var(--text-muted)">
+        <div>#63838d</div>
+        <div class="label">text-muted</div>
+      </div>
+    </div>
+
+    <h2>Accents</h2>
+    <div class="palette">
+      <div class="swatch" style="background: var(--accent-primary)">
+        <div>#8c3e05</div>
+        <div class="label">accent-primary</div>
+      </div>
+      <div class="swatch" style="background: var(--accent-secondary)">
+        <div>#563116</div>
+        <div class="label">accent-secondary</div>
+      </div>
+      <div class="swatch" style="background: var(--accent-warm); color: black">
+        <div>#b49e77</div>
+        <div class="label">accent-warm</div>
+      </div>
+    </div>
+
+    <h2>Borders</h2>
+    <div class="palette">
+      <div class="swatch" style="background: var(--border-default)">
+        <div>#495d50</div>
+        <div class="label">border-default</div>
+      </div>
+      <div class="swatch" style="background: var(--border-focus)">
+        <div>#729487</div>
+        <div class="label">border-focus</div>
+      </div>
+    </div>
+  </body>
+</html>
