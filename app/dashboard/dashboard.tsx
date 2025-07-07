@@ -13,9 +13,11 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
 
-  return (
-    <div>
-      <button
+  return <div></div>;
+}
+
+{
+  /* <button
         onClick={() => setOpen(true)}
         className="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-100 hover:bg-gray-950/10"
       >
@@ -54,14 +56,12 @@ export default function Dashboard() {
                     </DialogTitle>
                   </div>
                   <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                    {/* Your content */}
+                    {/* Your content 
                   </div>
                 </div>
               </DialogPanel>
             </div>
           </div>
         </div>
-      </Dialog>
-    </div>
-  );
+      </Dialog> */
 }

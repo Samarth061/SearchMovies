@@ -8,6 +8,7 @@ interface SliderProps {
   min: number;
   max: number;
   step: number;
+  unit?: string;
 }
 export default function Slider({
   htmlFor,
@@ -15,6 +16,7 @@ export default function Slider({
   min,
   max,
   step,
+  unit = "",
 }: SliderProps) {
   const [value, setValue] = useState(max / 2);
 
@@ -22,15 +24,15 @@ export default function Slider({
   const percent = ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="w-full max-w-md mx-auto ">
-      <label htmlFor={htmlFor} className="block mb-2 text-xl">
-        <h2 className="text-lg font-semibold">{title}</h2>
+    <div className="w-full max-w-xs sm:max-w-md mx-auto px-2 sm:px-0">
+      <label htmlFor={htmlFor} className="block mb-2">
+        <h2 className="text-xl font-geist-sans font-semibold text-semantic-text-primary">{title}</h2>
       </label>
 
       <div className="relative w-full">
         {/* Slider */}
         <input
-          id="rating-slider"
+          id={htmlFor}
           type="range"
           min={min}
           max={max}
@@ -42,12 +44,12 @@ export default function Slider({
 
         {/* Value below thumb */}
         <div
-          className="absolute text-md text-semantic-text-primary font-semibold -bottom-6 transition-all"
+          className="absolute text-base text-semantic-text-primary font-semibold -bottom-6 transition-all"
           style={{
-            left: `calc(${percent}% - 6px)`, // subtract to center it
+            left: `calc(${percent}% - 8px)`, // subtract to center it
           }}
         >
-          {value}
+          {value}{unit}
         </div>
       </div>
     </div>

@@ -6,8 +6,10 @@ export default function ShowMovies() {
   return (
     <div>
       <div>
-        <h2 className="text-lg font-semibold ">Show Movies</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <h2 className="text-xl font-geist-sans font-semibold text-semantic-text-primary">
+          Show Movies
+        </h2>
+        <div className="grid grid-cols-3 gap-2 mt-4">
           {number.map((number, index) => (
             <MovieButton key={index} number={number} />
           ))}
@@ -17,10 +19,16 @@ export default function ShowMovies() {
   );
 }
 
-function MovieButton({ number }: any) {
+interface MovieButtonProps {
+  number: number;
+}
+
+function MovieButton({ number }: MovieButtonProps) {
   return (
-    <div className=" bg-semantic-accent-primary rounded-lg text-center">
-      <p className="text-xl font-semibold">{number}</p>
+    <div className="bg-semantic-accent-primary rounded-lg text-center p-1 flex items-center justify-center hover:bg-semantic-accent-secondary hover:border-semantic-accent-focus transition-colors cursor-pointer aspect-square w-18 border-2 border-semantic-border-default">
+      <p className="text-2xl font-geist-sans font-semibold text-semantic-text-primary ">
+        {number}
+      </p>
     </div>
   );
 }
