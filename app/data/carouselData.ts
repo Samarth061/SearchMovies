@@ -43,6 +43,27 @@ export const dummyCarouselItems: CarouselItem[] = [
     description:
       "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son in this classic crime drama.",
   },
+  {
+    id: "7",
+    title: "John Wick",
+    image: "https://image.tmdb.org/t/p/w1280/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+    description:
+      "An ex-hit-man comes out of retirement to track down the gangsters that took everything from him.",
+  },
+  {
+    id: "8",
+    title: "Mad Max: Fury Road",
+    image: "https://image.tmdb.org/t/p/w1280/hA2ple9q4qnwxp3hKVNhroipsir.jpg",
+    description:
+      "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland.",
+  },
+  {
+    id: "9",
+    title: "Die Hard",
+    image: "https://image.tmdb.org/t/p/w1280/yFihWxQcmqcaBR31QM6Y8gT6aYV.jpg",
+    description:
+      "A New York police officer tries to save his wife and several others taken hostage by German terrorists.",
+  },
 ];
 
 // Alternative set with different genres

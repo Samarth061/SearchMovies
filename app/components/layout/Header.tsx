@@ -1,24 +1,29 @@
 "use client";
+import { useCollapsed } from "../../context/CollapsedContext";
 
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-  TransitionChild,
-} from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const { collapsed, setCollapsed } = useCollapsed();
+
+  function onClick() {
+    setCollapsed(!collapsed);
+    console.log(collapsed);
+  }
+
   return (
     <header className="w-full bg-semantic-background-secondary backdrop-blur-sm border-b border-semantic-border-default shadow-lg shadow-semantic-border-default/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Title */}
-          <div className="flex flex-row gap-2 sm:gap-8">
-            <div className="flex items-center space-x-2 sm:space-x-3">
+          <div className="flex flex-row gap-2 sm:gap-8 ">
+            <button
+              onClick={() => onClick()}
+              className="text-4xl p-4 focus:outline-none mb-1 transform transition-all duration-300 ease-in-out cursor-pointer "
+            >
+              ☰
+            </button>
+            <div className="flex items-center space-x-4 sm:space-x-3 p-4">
               <a
                 href="/"
                 className="flex items-center space-x-1 sm:space-x-2 hover:opacity-80 transition-opacity"
@@ -64,7 +69,10 @@ export default function Header() {
 
           {/* Search */}
           <div className="flex items-center">
-            <form action="./search/" className="flex items-center space-x-1 sm:space-x-2">
+            <form
+              action="./search/"
+              className="flex items-center space-x-1 sm:space-x-2"
+            >
               <input
                 type="search"
                 id="movie"

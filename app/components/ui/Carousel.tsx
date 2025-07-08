@@ -116,7 +116,7 @@ export default function Carousel({
                 target.src = "/placeholder-movie.jpg";
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/80 to-transparent" />
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/80 to-transparent" />
             <div className="absolute bottom-6 left-16 right-16">
               <h3 className="text-xl md:text-2xl font-bold text-semantic-text-primary mb-2">
                 {item.title}
@@ -126,7 +126,7 @@ export default function Carousel({
                   {item.description}
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
