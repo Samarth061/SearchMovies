@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionMoviesCarousel } from "../examples/CarouselExample";
+import { ActionMoviesCarousel } from "../../movies/components/MovieCarousels";
 
 export default function Dashboard() {
   return (

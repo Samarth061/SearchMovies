@@ -1,11 +1,51 @@
 "use client";
 import { dummyCarouselItems } from "@/app/data/carouselData";
 import MovieCard from "@/app/features/movies/components/MovieCard";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function MovieList() {
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 6;
+  const [screenSize, setScreenSize] = useState("lg");
+
+  // Screen size detection
+  useEffect(() => {
+    const getScreenSize = (width: number) => {
+      if (width < 640) return "xs"; // Mobile - 2 cols
+      if (width < 768) return "sm"; // Small - 3 cols
+      if (width < 1024) return "md"; // Medium - 4 cols
+      if (width < 1400) return "lg"; // Large - 5 cols
+      return "xl"; // Extra Large - 6 cols
+    };
+
+    const handleResize = () => {
+      setScreenSize(getScreenSize(window.innerWidth));
+    };
+
+    // Set initial size
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Dynamic movies per page based on screen size (2 rows)
+  const getMoviesPerPage = () => {
+    const columnMap: { [key: string]: number } = {
+      xs: 4, // 2 cols × 2 rows
+      sm: 6, // 3 cols × 2 rows
+      md: 8, // 4 cols × 2 rows
+      lg: 10, // 5 cols × 2 rows
+      xl: 12, // 6 cols × 2 rows
+    };
+    return columnMap[screenSize] || 6;
+  };
+
+  const moviesPerPage = getMoviesPerPage();
+
+  // Reset current page when screen size changes (to prevent out-of-bounds issues)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [screenSize]);
 
   // Calculate pagination
   const totalPages = Math.ceil(dummyCarouselItems.length / moviesPerPage);
@@ -83,9 +123,9 @@ export default function MovieList() {
   };
 
   return (
-    <div className="h-full w-full max-w-6xl mx-auto p-6 flex flex-col">
+    <div className="h-full w-full max-w-7xl mx-auto p-6 pb-3 flex flex-col ">
       {/* Movie Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 min-h-[680px] max-h-[800px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 md:gap-8 justify-items-center ">
         {currentMovies.map((movie, index) => (
           <MovieCard
             key={movie.id}
@@ -98,8 +138,11 @@ export default function MovieList() {
         ))}
       </div>
 
+      {/* Spacer to push pagination toward bottom */}
+      <div className="flex-1"></div>
+
       {/* Fixed Pagination at Bottom */}
-      <div className="mt-6 p-2 ">{totalPages > 1 && renderPagination()}</div>
+      <div className="mt-3 p-6">{renderPagination()}</div>
     </div>
   );
 }

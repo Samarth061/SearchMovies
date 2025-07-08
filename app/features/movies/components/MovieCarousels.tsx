@@ -26,18 +26,20 @@ export function FeaturedMoviesCarousel() {
 
 export function ActionMoviesCarousel() {
   return (
-    <div className="h-full w-1/2 flex flex-col">
-      <div className="flex-1 p-6">
-        <Carousel
-          items={actionMovieCarousel}
-          autoPlay={true}
-          showIndicators={true}
-          showControls={true}
-          customDimensions={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
+    <div className="w-full h-full flex flex-col">
+      <div className="flex-1 p-6 flex items-center justify-center">
+        <div className="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 xl:w-3/5 aspect-[2/3]">
+          <Carousel
+            items={actionMovieCarousel}
+            autoPlay={true}
+            showIndicators={true}
+            showControls={true}
+            customDimensions={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </div>
       </div>
     </div>
   );

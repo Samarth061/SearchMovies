@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface MovieCardProps {
   className?: string;
@@ -21,7 +22,7 @@ export default function MovieCard({
 
   return (
     <div
-      className="group relative w-full cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
+      className="group relative w-40 sm:w-44 md:w-48 lg:w-[220px] xl:w-[220px] cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="button"
@@ -35,22 +36,25 @@ export default function MovieCard({
     >
       {/* Main Card Container */}
       <div
-        className={`relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 ${className}`}
+        className={`relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[11/16] ${className}`}
       >
         {/* Movie Poster */}
-        <div className="relative w-full h-80 overflow-hidden">
-          <img
+        <div className="relative w-full h-full overflow-hidden">
+          <Image
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
 
           {/* Rating Badge */}
-          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
+          <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
             <div className="flex items-center gap-1">
-              <img
+              <Image
                 src={"/star-svgrepo-com.svg"}
                 alt="Star"
+                width={16}
+                height={16}
                 className="w-4 h-4"
               />
               <span className="text-white text-sm font-bold">{rating}</span>

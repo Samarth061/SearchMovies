@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useCollapsed } from "../../context/CollapsedContext";
 
 export default function Header() {
@@ -33,46 +35,48 @@ export default function Header() {
               ☰
             </button>
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <a
+              <Link
                 href="/"
                 className="flex items-center space-x-1 sm:space-x-2 hover:opacity-80 transition-opacity"
               >
-                <img
+                <Image
                   className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                   src="/movie-svgrepo-com.svg"
                   alt="Movie Clapboard"
+                  width={40}
+                  height={40}
                 />
                 <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-semantic-text-primary tracking-tight">
                   CinMatch
                 </h1>
-              </a>
+              </Link>
             </div>
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
-              <a
+              <Link
                 href="/"
                 className="text-semantic-text-secondary hover:text-semantic-text-primary transition-colors font-medium"
               >
                 Home
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/movies"
                 className="text-semantic-text-secondary hover:text-semantic-text-primary transition-colors font-medium"
               >
                 Movies
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/series"
                 className="text-semantic-text-secondary hover:text-semantic-text-primary transition-colors font-medium"
               >
                 Series
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/about"
                 className="text-semantic-text-secondary hover:text-semantic-text-primary transition-colors font-medium"
               >
                 About
-              </a>
+              </Link>
             </nav>
           </div>
 
@@ -102,10 +106,12 @@ export default function Header() {
                 aria-label="Search movies"
               >
                 <span className="hidden sm:inline">Search</span>
-                <img
+                <Image
                   className=" h-6 w-6 "
                   src="/search-5-svgrepo-com.svg"
                   alt="Search Icon"
+                  width={24}
+                  height={24}
                 />
               </button>
             </form>

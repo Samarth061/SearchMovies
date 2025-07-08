@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 export interface CarouselItem {
   id: string;
@@ -106,14 +107,15 @@ export default function Carousel({
             }`}
             aria-hidden={index !== currentIndex}
           >
-            <img
+            <Image
               src={item.image}
               alt={item.title}
-              className="absolute block w-full h-full object-cover -translate-x-1/2 top-0 left-1/2"
+              fill
+              className="object-cover"
               style={{ objectPosition: "center 5%" }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = "/placeholder-movie.jpg";
+              onError={() => {
+                // Next.js Image component handles errors differently
+                // Fallback handled by Next.js built-in error handling
               }}
             />
             {/* <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/80 to-transparent" />
