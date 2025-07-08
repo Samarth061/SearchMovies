@@ -24,9 +24,9 @@ export default function Slider({
   const percent = ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="w-full max-w-xs sm:max-w-md mx-auto px-2 sm:px-0">
-      <label htmlFor={htmlFor} className="block mb-2">
-        <h2 className="text-xl font-geist-sans font-semibold text-semantic-text-primary">{title}</h2>
+    <div className="w-full px-1 sm:px-2">
+      <label htmlFor={htmlFor} className="block mb-2 sm:mb-3">
+        <h2 className="text-lg sm:text-xl font-geist-sans font-semibold text-semantic-text-primary">{title}</h2>
       </label>
 
       <div className="relative w-full">
@@ -44,7 +44,7 @@ export default function Slider({
 
         {/* Value below thumb */}
         <div
-          className="absolute text-base text-semantic-text-primary font-semibold -bottom-6 transition-all"
+          className="absolute text-sm sm:text-base text-semantic-text-primary font-semibold -bottom-5 sm:-bottom-6 transition-all"
           style={{
             left: `calc(${percent}% - 8px)`, // subtract to center it
           }}
