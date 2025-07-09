@@ -1,21 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useCollapsed } from "../../context/CollapsedContext";
 
 export default function Header() {
-  const { collapsed, setCollapsed } = useCollapsed();
-
-  function onClick() {
-    setCollapsed(!collapsed);
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onClick();
-    }
-  };
 
   return (
     <header className="w-full bg-semantic-background-secondary backdrop-blur-sm border-b border-semantic-border-default shadow-lg shadow-semantic-border-default/20 sticky top-0 z-50">
@@ -23,17 +10,6 @@ export default function Header() {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo and Navigation */}
           <div className="flex flex-row items-center gap-2 sm:gap-4 lg:gap-8">
-            <button
-              onClick={onClick}
-              onKeyDown={handleKeyDown}
-              className="text-2xl sm:text-3xl p-2 sm:p-3 focus:outline-none focus:ring-2 focus:ring-semantic-border-focus focus:ring-offset-2 focus:ring-offset-semantic-background-secondary transform transition-all duration-300 ease-in-out cursor-pointer hover:scale-105 active:scale-95 rounded-md"
-              aria-label={collapsed ? "Expand menu" : "Collapse menu"}
-              aria-expanded={!collapsed}
-              role="button"
-              tabIndex={0}
-            >
-              ☰
-            </button>
             <div className="flex items-center space-x-2 sm:space-x-3">
               <Link
                 href="/"

@@ -26,7 +26,9 @@ export default function Slider({
   return (
     <div className="w-full px-1 sm:px-2">
       <label htmlFor={htmlFor} className="block mb-2 sm:mb-3">
-        <h2 className="text-lg sm:text-xl font-geist-sans font-semibold text-semantic-text-primary">{title}</h2>
+        <h2 className="text-lg sm:text-xl font-geist-sans font-semibold text-semantic-text-primary">
+          {title}
+        </h2>
       </label>
 
       <div className="relative w-full">
@@ -49,7 +51,8 @@ export default function Slider({
             left: `calc(${percent}% - 8px)`, // subtract to center it
           }}
         >
-          {value}{unit}
+          {value}
+          {unit}
         </div>
       </div>
     </div>

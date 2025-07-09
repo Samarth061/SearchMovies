@@ -22,7 +22,7 @@ export default function MovieCard({
 
   return (
     <div
-      className="group relative w-40 sm:w-44 md:w-48 lg:w-[220px] xl:w-[220px] cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
+      className="group relative w-full max-w-sm mx-auto cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="button"
@@ -36,7 +36,7 @@ export default function MovieCard({
     >
       {/* Main Card Container */}
       <div
-        className={`relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[11/16] ${className}`}
+        className={`relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[11/16] sm:aspect-[2/3] md:aspect-[2/3] lg:aspect-[2/3] xl:aspect-[2/3] ${className}`}
       >
         {/* Movie Poster */}
         <div className="relative w-full h-full overflow-hidden">

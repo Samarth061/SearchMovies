@@ -97,7 +97,7 @@ export default function Carousel({
       <div
         className={`relative ${
           customDimensions ? "h-full" : height
-        } overflow-hidden rounded-lg bg-semantic-background-card`}
+        } overflow-hidden rounded-lg bg-gradient-to-br from-semantic-background-primary via-semantic-background-secondary to-semantic-background-card`}
       >
         {items.map((item, index) => (
           <div
@@ -111,24 +111,14 @@ export default function Carousel({
               src={item.image}
               alt={item.title}
               fill
-              className="object-cover"
-              style={{ objectPosition: "center 5%" }}
+              className="object-contain"
+              style={{ objectPosition: "center center" }}
               onError={() => {
                 // Next.js Image component handles errors differently
                 // Fallback handled by Next.js built-in error handling
               }}
             />
-            {/* <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/80 to-transparent" />
-            <div className="absolute bottom-6 left-16 right-16">
-              <h3 className="text-xl md:text-2xl font-bold text-semantic-text-primary mb-2">
-                {item.title}
-              </h3>
-              {item.description && (
-                <p className="text-sm md:text-base text-semantic-text-secondary line-clamp-2">
-                  {item.description}
-                </p>
-              )}
-            </div> */}
+            <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/20 via-transparent to-transparent pointer-events-none" />
           </div>
         ))}
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import { dummyCarouselItems } from "@/app/data/carouselData";
-import MovieCard from "@/app/features/movies/components/MovieCard";
+import MovieCard from "@/app/components/movies/components/MovieCard";
 import React, { useState, useEffect } from "react";
 
 export default function MovieList() {
@@ -37,7 +37,7 @@ export default function MovieList() {
       lg: 10, // 5 cols × 2 rows
       xl: 12, // 6 cols × 2 rows
     };
-    return columnMap[screenSize] || 6;
+    return columnMap[screenSize] || 4;
   };
 
   const moviesPerPage = getMoviesPerPage();
@@ -123,9 +123,9 @@ export default function MovieList() {
   };
 
   return (
-    <div className="h-full w-full max-w-7xl mx-auto p-6 pb-3 flex flex-col ">
+    <div className="h-full w-full max-w-7xl mx-auto p-8 pb-3 flex flex-col ">
       {/* Movie Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 md:gap-8 justify-items-center ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 justify-items-center auto-rows-fr">
         {currentMovies.map((movie, index) => (
           <MovieCard
             key={movie.id}
@@ -142,7 +142,7 @@ export default function MovieList() {
       <div className="flex-1"></div>
 
       {/* Fixed Pagination at Bottom */}
-      <div className="mt-3 p-6">{renderPagination()}</div>
+      <div className="mt-1 p-3">{renderPagination()}</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import Carousel from "../../../components/ui/Carousel";
+import Carousel from "./Carousel";
 import {
   dummyCarouselItems,
   actionMovieCarousel,
@@ -26,9 +26,9 @@ export function FeaturedMoviesCarousel() {
 
 export function ActionMoviesCarousel() {
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="flex-1 p-6 flex items-center justify-center">
-        <div className="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 xl:w-3/5 aspect-[2/3]">
+    <div className="w-full flex-1 flex flex-col">
+      <div className="flex-1 p-3 md:p-0 flex items-center justify-center md:block">
+        <div className="w-4/5 sm:w-3/5 md:w-full  md:max-h-[75vh] aspect-[2/3] md:aspect-none min-h-[300px]">
           <Carousel
             items={actionMovieCarousel}
             autoPlay={true}

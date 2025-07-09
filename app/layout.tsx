@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex flex-col h-screen ${geistSans.variable} ${geistMono.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} flex flex-col min-h-screen`}
       >
         <ClientLayout>{children}</ClientLayout>
       </body>

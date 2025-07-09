@@ -1,52 +1,57 @@
 "use client";
-import {
-  ActionMoviesCarousel,
-} from "./features/movies/components/MovieCarousels";
-import Sidebar from "./components/layout/sidebar/Sidebar";
-import MovieList from "./components/ui/MovieList";
-import { useCollapsed } from "./context/CollapsedContext";
-import { useEffect, useState } from "react";
+import GenreButton from "./components/layout/sidebar/components/GenreButton";
+import ShowMovies from "./components/layout/sidebar/components/ShowMovies";
+import Slider from "./components/layout/sidebar/components/Slider";
+import { ActionMoviesCarousel } from "./components/movies/components/MovieCarousels";
+import MovieList from "./components/movies/components/MovieList";
+import genres from "./data/genreData";
 
 export default function HomePage() {
-  const { collapsed, setCollapsed } = useCollapsed();
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const isSmall = window.innerWidth < 768; // md breakpoint
-      setIsSmallScreen(isSmall);
-    };
-
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
-  const showSidebar = !collapsed;
-
   return (
-    <div className="flex flex-row w-full h-full">
-      {showSidebar && (
-        <div className="relative">
-          <Sidebar />
-          {/* Overlay for mobile when sidebar is open */}
-          {isSmallScreen && (
-            <div 
-              className="fixed inset-0 bg-black/50 z-30 md:hidden"
-              onClick={() => setCollapsed(true)}
-              aria-label="Close sidebar"
+    <div className="flex flex-col min-h-screen w-full">
+      <div className="flex-1 w-full ">
+        <ActionMoviesCarousel />
+      </div>
+
+      {/* Controls section */}
+      <div className="w-full p-6">
+        <div className="flex flex-wrap justify-center items-end gap-6 lg:gap-8">
+          {/* Genre buttons */}
+
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 md:gap-4 justify-items-center">
+            {genres.map((genre, index) => (
+              <GenreButton key={index} genre={genre} />
+            ))}
+          </div>
+
+          {/* Sliders */}
+          <div className="min-w-[180px] lg:min-w-[200px]">
+            <Slider
+              htmlFor={"duration-slider"}
+              title="Duration"
+              min={60}
+              max={240}
+              step={15}
+              unit="min"
             />
-          )}
+          </div>
+
+          <div className="min-w-[180px] lg:min-w-[200px]">
+            <Slider
+              htmlFor={"rating-slider"}
+              title="Rating"
+              min={0}
+              max={10}
+              step={0.1}
+              unit=""
+            />
+          </div>
+
+          <ShowMovies />
         </div>
-      )}
-      <div className="flex-1 flex flex-col md:flex-row h-full">
-        <div className="flex-1 md:w-1/2">
-          <ActionMoviesCarousel />
-        </div>
-        <div className="flex-1 md:w-1/2">
-          <MovieList />
-        </div>
+      </div>
+      <div className="flex">
+        <MovieList />
       </div>
     </div>
   );
