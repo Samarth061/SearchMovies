@@ -69,21 +69,109 @@ export default function MovieList() {
 
   const renderPagination = () => {
     const pages = [];
+    const maxVisiblePages = 4;
 
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <button
-          key={i}
-          onClick={() => goToPage(i)}
-          className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-            currentPage === i
-              ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
-              : "bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
-          }`}
-        >
-          {i}
-        </button>
-      );
+    // If total pages is 4 or less, show all pages
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(
+          <button
+            key={i}
+            onClick={() => goToPage(i)}
+            className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+              currentPage === i
+                ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
+                : "bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
+            }`}
+          >
+            {i}
+          </button>
+        );
+      }
+    } else {
+      // Sliding window logic for more than 4 pages
+      let startPage, endPage;
+
+      if (currentPage <= 2) {
+        // Show first 4 pages when at the beginning
+        startPage = 1;
+        endPage = maxVisiblePages;
+      } else if (currentPage > totalPages - 2) {
+        // Show last 4 pages when near the end
+        startPage = totalPages - maxVisiblePages + 1;
+        endPage = totalPages;
+      } else {
+        // Show current page in the middle of the window
+        startPage = currentPage - 1;
+        endPage = currentPage + 2;
+      }
+
+      // Always show first page if not in window
+      if (startPage > 1) {
+        pages.push(
+          <button
+            key={1}
+            onClick={() => goToPage(1)}
+            className="w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
+          >
+            1
+          </button>
+        );
+
+        // Add ellipsis if there's a gap
+        if (startPage > 2) {
+          pages.push(
+            <span
+              key="ellipsis-start"
+              className="w-10 h-10 flex items-center justify-center text-semantic-text-muted"
+            >
+              ...
+            </span>
+          );
+        }
+      }
+
+      // Add pages in the sliding window
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(
+          <button
+            key={i}
+            onClick={() => goToPage(i)}
+            className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+              currentPage === i
+                ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
+                : "bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
+            }`}
+          >
+            {i}
+          </button>
+        );
+      }
+
+      // Always show last page if not in window
+      if (endPage < totalPages) {
+        // Add ellipsis if there's a gap
+        if (endPage < totalPages - 1) {
+          pages.push(
+            <span
+              key="ellipsis-end"
+              className="w-10 h-10 flex items-center justify-center text-semantic-text-muted"
+            >
+              ...
+            </span>
+          );
+        }
+
+        pages.push(
+          <button
+            key={totalPages}
+            onClick={() => goToPage(totalPages)}
+            className="w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
+          >
+            {totalPages}
+          </button>
+        );
+      }
     }
 
     return (

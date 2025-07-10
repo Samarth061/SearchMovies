@@ -9,7 +9,7 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isInitialized, setIsInitialized] = useState(true);
+  const [isInitialized] = useState(true);
 
   return (
     <>
