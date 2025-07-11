@@ -6,25 +6,34 @@
     <title>Dark Mode Palette</title>
     <style>
       :root {
-        /* Backgrounds */
-        --bg-primary: #070a09;
-        --bg-secondary: #0c222d;
-        --bg-card: #1f3530;
-        --bg-elevated: #1a3f4d;
+        --bg-primary: white;
+        --bg-secondary: #0d0000;
+        --bg-card: #1a0000;
+        --bg-elevated: #220000;
 
         /* Text Colors */
-        --text-primary: #b49e77;
-        --text-secondary: #729487;
-        --text-muted: #63838d;
+        --text-primary: #ffffff;
+        --text-secondary: #f0f0f0;
+        --text-muted: #cccccc;
 
         /* Accent Colors */
-        --accent-primary: #8c3e05;
-        --accent-secondary: #563116;
-        --accent-warm: #b49e77;
+        --accent-primary: #ff0000;
+        --accent-secondary: #ff3333;
+        --accent-warm: #ff6666;
+        --accent-hot: #ff9999;
 
         /* Borders */
-        --border-default: #495d50;
-        --border-focus: #729487;
+        --border-default: #1a0000;
+        --border-focus: #ff0000;
+        --border-hover: #ff3333;
+
+        /* Interactive States */
+        --hover-overlay: rgba(255, 0, 0, 0.15);
+        --active-overlay: rgba(255, 0, 0, 0.25);
+
+        /* Legacy support */
+        --background: var(--bg-primary);
+        --foreground: var(--text-primary);
       }
 
       body {
@@ -75,24 +84,24 @@
     </style>
   </head>
   <body>
-    <h1>🎨 Dark Mode Color Palette</h1>
+    <h1>🎨 Dark Fire Theme Palette</h1>
 
     <h2>Backgrounds</h2>
     <div class="palette">
       <div class="swatch" style="background: var(--bg-primary)">
-        <div>#070a09</div>
+        <div>#000000</div>
         <div class="label">bg-primary</div>
       </div>
       <div class="swatch" style="background: var(--bg-secondary)">
-        <div>#0c222d</div>
+        <div>#0d0000</div>
         <div class="label">bg-secondary</div>
       </div>
       <div class="swatch" style="background: var(--bg-card)">
-        <div>#1f3530</div>
+        <div>#1a0000</div>
         <div class="label">bg-card</div>
       </div>
       <div class="swatch" style="background: var(--bg-elevated)">
-        <div>#1a3f4d</div>
+        <div>#220000</div>
         <div class="label">bg-elevated</div>
       </div>
     </div>
@@ -100,15 +109,18 @@
     <h2>Text</h2>
     <div class="palette">
       <div class="swatch" style="background: var(--text-primary); color: black">
-        <div>#b49e77</div>
+        <div>#ffffff</div>
         <div class="label">text-primary</div>
       </div>
-      <div class="swatch" style="background: var(--text-secondary)">
-        <div>#729487</div>
+      <div
+        class="swatch"
+        style="background: var(--text-secondary); color: black"
+      >
+        <div>#f0f0f0</div>
         <div class="label">text-secondary</div>
       </div>
-      <div class="swatch" style="background: var(--text-muted)">
-        <div>#63838d</div>
+      <div class="swatch" style="background: var(--text-muted); color: black">
+        <div>#cccccc</div>
         <div class="label">text-muted</div>
       </div>
     </div>
@@ -116,28 +128,54 @@
     <h2>Accents</h2>
     <div class="palette">
       <div class="swatch" style="background: var(--accent-primary)">
-        <div>#8c3e05</div>
+        <div>#ff0000</div>
         <div class="label">accent-primary</div>
       </div>
       <div class="swatch" style="background: var(--accent-secondary)">
-        <div>#563116</div>
+        <div>#ff3333</div>
         <div class="label">accent-secondary</div>
       </div>
-      <div class="swatch" style="background: var(--accent-warm); color: black">
-        <div>#b49e77</div>
+      <div class="swatch" style="background: var(--accent-warm)">
+        <div>#ff6666</div>
         <div class="label">accent-warm</div>
+      </div>
+      <div class="swatch" style="background: var(--accent-hot)">
+        <div>#ff9999</div>
+        <div class="label">accent-hot</div>
       </div>
     </div>
 
     <h2>Borders</h2>
     <div class="palette">
       <div class="swatch" style="background: var(--border-default)">
-        <div>#495d50</div>
+        <div>#1a0000</div>
         <div class="label">border-default</div>
       </div>
       <div class="swatch" style="background: var(--border-focus)">
-        <div>#729487</div>
+        <div>#ff0000</div>
         <div class="label">border-focus</div>
+      </div>
+      <div class="swatch" style="background: var(--border-hover)">
+        <div>#ff3333</div>
+        <div class="label">border-hover</div>
+      </div>
+    </div>
+
+    <h2>Interactive States</h2>
+    <div class="palette">
+      <div
+        class="swatch"
+        style="background: var(--hover-overlay); border: 2px solid #ff0000"
+      >
+        <div>rgba(255, 0, 0, 0.15)</div>
+        <div class="label">hover-overlay</div>
+      </div>
+      <div
+        class="swatch"
+        style="background: var(--active-overlay); border: 2px solid #ff0000"
+      >
+        <div>rgba(255, 0, 0, 0.25)</div>
+        <div class="label">active-overlay</div>
       </div>
     </div>
   </body>

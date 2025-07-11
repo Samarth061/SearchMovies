@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-semantic-background-primary border-t border-semantic-border-default p-2 sm:p-4 text-semantic-text-primary">
+    <footer className="bg-semantic-background-secondary shadow-semantic-border-default/20 border-t border-semantic-border-default p-2 sm:p-4 text-semantic-text-primary">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
         {/* Left Side */}
         <div className="text-md sm:text-sm">

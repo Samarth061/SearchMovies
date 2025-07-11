@@ -3,18 +3,17 @@
 import { useState } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import Sidebar from "./components/layout/Sidebar";
+import { SidebarProvider, useSidebar } from "./contexts/SidebarContext";
 
-export default function ClientLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function ClientLayoutContent({ children }: { children: React.ReactNode }) {
   const [isInitialized] = useState(true);
+  const { isSidebarOpen, closeSidebar } = useSidebar();
 
   return (
     <>
       <Header />
-      <main className="flex-1 min-h-screen p-4">
+      <main className="flex-1 min-h-screen p-4 bg-semantic-background-primary">
         {isInitialized ? (
           children
         ) : (
@@ -24,6 +23,19 @@ export default function ClientLayout({
         )}
       </main>
       <Footer />
+      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
     </>
+  );
+}
+
+export default function ClientLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <SidebarProvider>
+      <ClientLayoutContent>{children}</ClientLayoutContent>
+    </SidebarProvider>
   );
 }

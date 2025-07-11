@@ -32,10 +32,10 @@ export default function MovieList() {
   const getMoviesPerPage = () => {
     const columnMap: { [key: string]: number } = {
       xs: 4, // 2 cols × 2 rows
-      sm: 6, // 3 cols × 2 rows
+      sm: 6, // 2 cols × 3 rows
       md: 8, // 4 cols × 2 rows
-      lg: 10, // 5 cols × 2 rows
-      xl: 12, // 6 cols × 2 rows
+      lg: 8, // 4 cols × 2 rows
+      xl: 8, // 4 cols × 2 rows
     };
     return columnMap[screenSize] || 4;
   };
@@ -71,107 +71,26 @@ export default function MovieList() {
     const pages = [];
     const maxVisiblePages = 4;
 
-    // If total pages is 4 or less, show all pages
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(
-          <button
-            key={i}
-            onClick={() => goToPage(i)}
-            className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-              currentPage === i
-                ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
-                : "bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
-            }`}
-          >
-            {i}
-          </button>
-        );
-      }
-    } else {
-      // Sliding window logic for more than 4 pages
-      let startPage, endPage;
+    // Simple 4-page grouping logic
+    const groupIndex = Math.floor((currentPage - 1) / maxVisiblePages);
+    const startPage = groupIndex * maxVisiblePages + 1;
+    const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
 
-      if (currentPage <= 2) {
-        // Show first 4 pages when at the beginning
-        startPage = 1;
-        endPage = maxVisiblePages;
-      } else if (currentPage > totalPages - 2) {
-        // Show last 4 pages when near the end
-        startPage = totalPages - maxVisiblePages + 1;
-        endPage = totalPages;
-      } else {
-        // Show current page in the middle of the window
-        startPage = currentPage - 1;
-        endPage = currentPage + 2;
-      }
-
-      // Always show first page if not in window
-      if (startPage > 1) {
-        pages.push(
-          <button
-            key={1}
-            onClick={() => goToPage(1)}
-            className="w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
-          >
-            1
-          </button>
-        );
-
-        // Add ellipsis if there's a gap
-        if (startPage > 2) {
-          pages.push(
-            <span
-              key="ellipsis-start"
-              className="w-10 h-10 flex items-center justify-center text-semantic-text-muted"
-            >
-              ...
-            </span>
-          );
-        }
-      }
-
-      // Add pages in the sliding window
-      for (let i = startPage; i <= endPage; i++) {
-        pages.push(
-          <button
-            key={i}
-            onClick={() => goToPage(i)}
-            className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-              currentPage === i
-                ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
-                : "bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
-            }`}
-          >
-            {i}
-          </button>
-        );
-      }
-
-      // Always show last page if not in window
-      if (endPage < totalPages) {
-        // Add ellipsis if there's a gap
-        if (endPage < totalPages - 1) {
-          pages.push(
-            <span
-              key="ellipsis-end"
-              className="w-10 h-10 flex items-center justify-center text-semantic-text-muted"
-            >
-              ...
-            </span>
-          );
-        }
-
-        pages.push(
-          <button
-            key={totalPages}
-            onClick={() => goToPage(totalPages)}
-            className="w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-semantic-background-card text-semantic-text-secondary hover:bg-semantic-background-elevated hover:text-semantic-text-primary"
-          >
-            {totalPages}
-          </button>
-        );
-      }
+    // Generate exactly 4 consecutive page buttons (or fewer if at the end)
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => goToPage(i)}
+          className={`w-10 h-10  font-semibold transition-all duration-300 transform hover:scale-105 ${
+            currentPage === i
+              ? "bg-semantic-accent-primary text-semantic-text-primary shadow-lg"
+              : "bg-semantic-background-button text-semantic-text-secondary hover:bg-semantic-accent-secondary hover:text-semantic-text-primary"
+          }`}
+        >
+          {i}
+        </button>
+      );
     }
 
     return (
@@ -180,7 +99,7 @@ export default function MovieList() {
         <button
           onClick={() => goToPage(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center ${
+          className={`w-10 h-10  font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center ${
             currentPage === 1
               ? "bg-semantic-background-primary text-semantic-text-muted cursor-not-allowed"
               : "bg-semantic-background-elevated text-semantic-text-secondary hover:bg-semantic-accent-secondary hover:text-semantic-text-primary"
@@ -197,7 +116,7 @@ export default function MovieList() {
         <button
           onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className={`w-10 h-10 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center ${
+          className={`w-10 h-10 font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center ${
             currentPage === totalPages
               ? "bg-semantic-background-primary text-semantic-text-muted cursor-not-allowed"
               : "bg-semantic-background-elevated text-semantic-text-secondary hover:bg-semantic-accent-secondary hover:text-semantic-text-primary"
@@ -211,9 +130,9 @@ export default function MovieList() {
   };
 
   return (
-    <div className="h-full w-full max-w-7xl mx-auto p-8 pb-3 flex flex-col ">
+    <div className="h-full w-full max-w-[1440px] flex flex-col ">
       {/* Movie Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 justify-items-center auto-rows-fr">
+      <div className="grid grid-cols-2 pt-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center auto-rows-fr">
         {currentMovies.map((movie, index) => (
           <MovieCard
             key={movie.id}

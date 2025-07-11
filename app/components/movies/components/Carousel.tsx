@@ -8,6 +8,7 @@ export interface CarouselItem {
   title: string;
   image: string;
   description?: string;
+  rating?: number;
 }
 
 interface CarouselProps {
@@ -17,14 +18,6 @@ interface CarouselProps {
   showIndicators?: boolean;
   showControls?: boolean;
   className?: string;
-  height?: string;
-  width?: string;
-  customDimensions?: {
-    width?: string;
-    height?: string;
-    maxWidth?: string;
-    maxHeight?: string;
-  };
 }
 
 export default function Carousel({
@@ -34,9 +27,6 @@ export default function Carousel({
   showIndicators = true,
   showControls = true,
   className = "",
-  height = "h-56 md:h-96",
-  width = "w-full",
-  customDimensions,
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -66,39 +56,21 @@ export default function Carousel({
   if (!items || items.length === 0) {
     return (
       <div
-        className={`flex items-center justify-center ${height} bg-semantic-background-card rounded-lg`}
+        className={`flex items-center justify-center aspect-video bg-semantic-background-card ${className}`}
       >
         <p className="text-semantic-text-muted">No items to display</p>
       </div>
     );
   }
 
-  const containerStyles = customDimensions
-    ? {
-        width: customDimensions.width || width,
-        height: customDimensions.height || height,
-        maxWidth: customDimensions.maxWidth,
-        maxHeight: customDimensions.maxHeight,
-      }
-    : {};
-
-  const containerClasses = customDimensions
-    ? `relative ${className}`
-    : `relative ${width} ${className}`;
-
   return (
     <div
-      className={containerClasses}
-      style={customDimensions ? containerStyles : {}}
+      className={`relative w-full aspect-video ${className}`}
       role="region"
       aria-label="Featured content carousel"
     >
       {/* Carousel wrapper */}
-      <div
-        className={`relative ${
-          customDimensions ? "h-full" : height
-        } overflow-hidden rounded-lg bg-gradient-to-br from-semantic-background-primary via-semantic-background-secondary to-semantic-background-card`}
-      >
+      <div className="relative w-full h-full overflow-hidden bg-gradient-to-br from-semantic-background-secondary via-semantic-accent-primary to-semantic-background-elevated">
         {items.map((item, index) => (
           <div
             key={item.id}
@@ -119,13 +91,43 @@ export default function Carousel({
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/20 via-transparent to-transparent pointer-events-none" />
+
+            {/* Title and Description Overlay - Bottom Left */}
+            <div className="absolute bottom-10 left-8 max-w-xs lg:max-w-xl backdrop-blur-md bg-black/80 rounded-lg p-4">
+              <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-bold line-clamp-1">
+                {item.title}
+              </h3>
+              {item.description && (
+                <p className="hidden lg:block text-white/90 text-base md:text-lg lg:text-xl mt-2 line-clamp-2">
+                  {item.description}
+                </p>
+              )}
+            </div>
+
+            {/* Rating Display - Top Right */}
+            {item.rating && (
+              <div className="absolute top-4 right-4 backdrop-blur-md bg-black/80 rounded-lg px-3 py-2">
+                <div className="flex items-center space-x-1">
+                  <svg
+                    className="w-4 h-4 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="text-white font-semibold text-sm">
+                    {item.rating}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
 
       {/* Slider indicators */}
       {showIndicators && items.length > 1 && (
-        <div className="absolute z-30 flex -translate-x-1/2 bottom-1 left-1/2 space-x-3">
+        <div className="absolute z-30 flex -translate-x-1/2 bottom-6 left-1/2 space-x-3">
           {items.map((_, index) => (
             <button
               key={index}
@@ -151,7 +153,7 @@ export default function Carousel({
           onClick={prevSlide}
           aria-label="Previous slide"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
+          <span className="inline-flex items-center justify-center w-10 h-10 bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
             <svg
               className="w-4 h-4 text-semantic-text-primary"
               aria-hidden="true"
@@ -180,7 +182,7 @@ export default function Carousel({
           onClick={nextSlide}
           aria-label="Next slide"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
+          <span className="inline-flex items-center justify-center w-10 h-10 bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
             <svg
               className="w-4 h-4 text-semantic-text-primary"
               aria-hidden="true"

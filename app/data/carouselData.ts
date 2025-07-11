@@ -146,6 +146,11 @@ export const dummyCarouselItems: CarouselItem[] = [
 // Alternative set with different genres
 export const actionMovieCarousel: CarouselItem[] = [
   {
+    id: "action-4",
+    title: "The Dark Knight",
+    image: "https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+  },
+  {
     id: "action-1",
     title: "John Wick",
     image: "https://image.tmdb.org/t/p/w1280/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
@@ -231,3 +236,85 @@ export const singleItemCarousel: CarouselItem[] = [
 
 // Empty array for testing empty state
 export const emptyCarousel: CarouselItem[] = [];
+
+// New 16:9 backdrop dataset for standardized carousels
+export const featuredBackdropCarousel: CarouselItem[] = [
+  {
+    id: "backdrop-1",
+    title: "The Shawshank Redemption",
+    image: "https://image.tmdb.org/t/p/w1280/j9XKiZrVeViAixVRzCta7h1VU9W.jpg",
+    description:
+      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    rating: 9.3,
+  },
+  {
+    id: "backdrop-2",
+    title: "Interstellar",
+    image: "https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
+    description:
+      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    rating: 8.6,
+  },
+  {
+    id: "backdrop-3",
+    title: "Inception",
+    image: "https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg",
+    description:
+      "A thief who enters the dreams of others to steal secrets must plant an idea into the mind of a CEO.",
+    rating: 8.8,
+  },
+  {
+    id: "backdrop-4",
+    title: "The Godfather",
+    image: "https://image.tmdb.org/t/p/w1280/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg",
+    description:
+      "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.",
+    rating: 9.2,
+  },
+  {
+    id: "backdrop-5",
+    title: "Fight Club",
+    image: "https://image.tmdb.org/t/p/w1280/hTExot1sfn7dHZjGrk0Aiwpntxt.jpg",
+    description:
+      "An insomniac office worker and a soap maker form an underground fight club that evolves into something much more.",
+    rating: 8.8,
+  },
+];
+
+export const actionBackdropCarousel: CarouselItem[] = [
+  {
+    id: "action-backdrop-1",
+    title: "John Wick",
+    image: "https://image.tmdb.org/t/p/w1280/umC04Cozevu8nn3JTDJ1pc7PVTn.jpg",
+    description:
+      "An ex-hit-man comes out of retirement to track down the gangsters that took everything from him.",
+  },
+  {
+    id: "action-backdrop-2",
+    title: "Mad Max: Fury Road",
+    image: "https://image.tmdb.org/t/p/w1280/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+    description:
+      "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland.",
+  },
+  {
+    id: "action-backdrop-3",
+    title: "Die Hard",
+    image: "https://image.tmdb.org/t/p/w1280/aJCEIMX3xtXceC1xwz6kovowOqr.jpg",
+    description:
+      "A New York police officer tries to save his wife and several others taken hostage by German terrorists.",
+  },
+  {
+    id: "action-backdrop-4",
+    title: "Top Gun: Maverick",
+    image: "https://image.tmdb.org/t/p/w1280/odM92ap21JyfVfc4F9O68tFbdJY.jpg",
+    description:
+      "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past.",
+  },
+  {
+    id: "action-backdrop-5",
+    title: "Mission: Impossible - Fallout",
+    image: "https://image.tmdb.org/t/p/w1280/8yqzkoHrTdbuVl4h7lB3YGnYjh8.jpg",
+    description:
+      "Ethan Hunt and his team race against time after a mission goes wrong.",
+  },
+];

@@ -1,25 +1,34 @@
 @import "tailwindcss";
+@import "./themes.css";
 
 :root {
-  /* Backgrounds */
-  --bg-primary: #070a09;
-  --bg-secondary: #0c222d;
-  --bg-card: #1f3530;
-  --bg-elevated: #1a3f4d;
+  /* Default theme (theme1) applied to root */
+  /* Dark Fire Theme - Organized */
+  /* Backgrounds - Ultra-black progression */
+  --bg-primary: #ffffff;
+  --bg-secondary: #000000;
+  --bg-button: #1a0000;
+  --bg-elevated: #0d0000;
 
-  /* Text Colors */
-  --text-primary: #b49e77;
-  --text-secondary: #729487;
-  --text-muted: #63838d;
+  /* Text Colors - Maximum contrast */
+  --text-primary: #ffffff;
+  --text-secondary: #f0f0f0;
+  --text-muted: #cccccc;
 
-  /* Accent Colors */
-  --accent-primary: #8c3e05;
-  --accent-secondary: #563116;
-  --accent-warm: #b49e77;
+  /* Accent Colors - Electric bright reds */
+  --accent-primary: #ff0000;
+  --accent-secondary: #ff3333;
+  --accent-warm: #ff6666;
+  --accent-hot: #ff9999;
 
-  /* Borders */
-  --border-default: #495d50;
-  --border-focus: #729487;
+  /* Borders - High contrast */
+  --border-default: #000000;
+  --border-focus: #ff0000;
+  --border-hover: #ff3333;
+
+  /* Interactive States - Glowing effects */
+  --hover-overlay: rgba(255, 0, 0, 0.15);
+  --active-overlay: rgba(255, 0, 0, 0.25);
 
   /* Legacy support */
   --background: var(--bg-primary);
@@ -29,7 +38,7 @@
   /* Semantic Colors */
   --color-semantic-background-primary: var(--bg-primary);
   --color-semantic-background-secondary: var(--bg-secondary);
-  --color-semantic-background-card: var(--bg-card);
+  --color-semantic-background-button: var(--bg-button);
   --color-semantic-background-elevated: var(--bg-elevated);
 
   --color-semantic-text-primary: var(--text-primary);

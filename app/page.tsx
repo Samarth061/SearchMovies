@@ -1,5 +1,5 @@
 "use client";
-import SearchControls from "./components/layout/SearchControls";
+import SearchControls from "./components/layout/searchControls/SearchControls";
 import { ActionMoviesCarousel } from "./components/movies/components/MovieCarousels";
 import MovieList from "./components/movies/components/MovieList";
 
@@ -10,7 +10,7 @@ export default function HomePage() {
         <ActionMoviesCarousel />
       </div>
 
-      <div className="flex-1 w-full max-w-[1440px] mx-auto p-5">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto">
         <SearchControls />
         <MovieList />
       </div>

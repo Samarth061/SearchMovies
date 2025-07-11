@@ -1,0 +1,65 @@
+html.theme1 {
+  /* Dark Fire Theme - Organized */
+  /* Backgrounds - Ultra-black progression */
+  --bg-primary: #ffffff;
+  --bg-secondary: #000000;
+  --bg-button: #1a0000;
+  --bg-elevated: #0d0000;
+
+  /* Text Colors - Maximum contrast */
+  --text-primary: #ffffff;
+  --text-secondary: #f0f0f0;
+  --text-muted: #cccccc;
+
+  /* Accent Colors - Electric bright reds */
+  --accent-primary: #ff0000;
+  --accent-secondary: #ff3333;
+  --accent-warm: #ff6666;
+  --accent-hot: #ff9999;
+
+  /* Borders - High contrast */
+  --border-default: #000000;
+  --border-focus: #ff0000;
+  --border-hover: #ff3333;
+
+  /* Interactive States - Glowing effects */
+  --hover-overlay: rgba(255, 0, 0, 0.15);
+  --active-overlay: rgba(255, 0, 0, 0.25);
+
+  /* Legacy support */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
+
+html.theme2 {
+  /* Dark Fire Theme - Organized */
+  /* Backgrounds - Ultra-black progression */
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --bg-button: #1a0000;
+  --bg-elevated: #ffffff;
+
+  /* Text Colors - Maximum contrast */
+  --text-primary: #ffffff;
+  --text-secondary: #f0f0f0;
+  --text-muted: #cccccc;
+
+  /* Accent Colors - Electric bright reds */
+  --accent-primary: #ff0000;
+  --accent-secondary: #ff3333;
+  --accent-warm: #ff6666;
+  --accent-hot: #ff9999;
+
+  /* Borders - High contrast */
+  --border-default: #000000;
+  --border-focus: #ff0000;
+  --border-hover: #ff3333;
+
+  /* Interactive States - Glowing effects */
+  --hover-overlay: rgba(255, 0, 0, 0.15);
+  --active-overlay: rgba(255, 0, 0, 0.25);
+
+  /* Legacy support */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
