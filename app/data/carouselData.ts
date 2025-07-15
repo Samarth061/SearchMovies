@@ -1,4 +1,16 @@
 import { CarouselItem } from "../components/movies/components/Carousel";
+import { getTopRatedMovies } from "../lib/tmdb";
+
+export async function getBackdropCarousel() {
+  const topRatedMovies = await getTopRatedMovies();
+  return topRatedMovies.map((movie) => ({
+    id: movie.id.toString(),
+    title: movie.title,
+    image: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
+    description: movie.overview,
+    rating: Math.ceil(movie.vote_average * 10) / 10,
+  }));
+}
 
 export const dummyCarouselItems: CarouselItem[] = [
   {

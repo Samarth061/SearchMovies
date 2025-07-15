@@ -9,10 +9,10 @@ import { useSidebar } from "@/app/contexts/SidebarContext";
 export default function SearchControls() {
   const { toggleSidebar } = useSidebar();
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex items-center justify-between gap-4 py-3 lg:p-0">
       {/* Left side - Genre buttons */}
-      <div className="flex flex-wrap gap-6 lg:gap-8 items-center lg:min-h-[110px]">
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 md:gap-4 justify-items-center">
+      <div className="flex overflow-x-auto sm:overflow-visible gap-6 lg:gap-8 items-center lg:min-h-[110px] pb-2 sm:pb-0">
+        <div className="flex gap-4 justify-items-center">
           {genres.map((genre, index) => (
             <GenreButton key={index} genre={genre} />
           ))}
@@ -38,7 +38,7 @@ export default function SearchControls() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-semantic-text-secondary group-hover:text-semantic-accent-primary transition-colors duration-200"
+            className="w-6 h-6 font-bold text-semantic-accent-secondary group-hover:text-semantic-accent-primary transition-colors duration-200"
           >
             <path
               strokeLinecap="round"

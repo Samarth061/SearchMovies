@@ -1,34 +1,65 @@
+"use client";
+import { useEffect, useState } from "react";
 import Carousel from "./Carousel";
 import {
-  dummyCarouselItems,
   fallbackCarouselItems,
   featuredBackdropCarousel,
+  getBackdropCarousel,
 } from "../../../data/carouselData";
+import { CarouselItem } from "./Carousel";
 
 export function FeaturedMoviesCarousel() {
-  return (
-    <div className="w-full flex flex-col">
-      <div className="flex-1 p-3 md:p-2 flex items-center justify-center">
-        <div className="w-full max-w-[1280px] mx-auto aspect-video">
-          <Carousel
-            items={dummyCarouselItems}
-            autoPlay={true}
-            showIndicators={true}
-            showControls={true}
-          />
+  const [items, setItems] = useState<CarouselItem[]>(featuredBackdropCarousel);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadMovies() {
+      try {
+        console.log("Attempting to load movies from TMDB API...");
+        const apiItems = await getBackdropCarousel();
+        console.log("Successfully loaded movies:", apiItems.length);
+        setItems(apiItems);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to load movies from API, using fallback:", err);
+        setError(err instanceof Error ? err.message : "Failed to load movies");
+        setItems(featuredBackdropCarousel);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadMovies();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="w-full flex-1 flex flex-col">
+        <div className="flex-1 p-3 md:p-2 flex items-center justify-center">
+          <div className="w-full max-w-[1440px] mx-auto aspect-video bg-semantic-background-secondary rounded-lg flex items-center justify-center">
+            <p className="text-semantic-text-secondary">
+              Loading featured movies...
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-export function ActionMoviesCarousel() {
   return (
     <div className="w-full flex-1 flex flex-col">
+      {error && (
+        <div className="text-center p-2">
+          <p className="text-semantic-text-secondary text-sm">
+            Using fallback movies (API: {error})
+          </p>
+        </div>
+      )}
       <div className="flex-1 p-3 md:p-2 flex items-center justify-center">
         <div className="w-full max-w-[1440px] mx-auto aspect-video">
           <Carousel
-            items={featuredBackdropCarousel}
+            items={items}
             autoPlay={true}
             showIndicators={true}
             showControls={true}
@@ -55,17 +86,6 @@ export function FallbackCarousel() {
           />
         </div>
       </div>
-    </div>
-  );
-}
-
-// Complete example page component
-export default function CarouselExamples() {
-  return (
-    <div className="container mx-auto px-4 py-8 space-y-12">
-      <FeaturedMoviesCarousel />
-      <ActionMoviesCarousel />
-      <FallbackCarousel />
     </div>
   );
 }

@@ -1,12 +1,11 @@
 "use client";
-import { dummyCarouselItems } from "@/app/data/carouselData";
+import { mockMovies } from "@/app/data/mockMovies";
 import MovieCard from "@/app/components/movies/components/MovieCard";
 import React, { useState, useEffect } from "react";
 
 export default function MovieList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [screenSize, setScreenSize] = useState("lg");
-
   // Screen size detection
   useEffect(() => {
     const getScreenSize = (width: number) => {
@@ -48,19 +47,15 @@ export default function MovieList() {
   }, [screenSize]);
 
   // Calculate pagination
-  const totalPages = Math.ceil(dummyCarouselItems.length / moviesPerPage);
+  const totalPages = Math.ceil(mockMovies.length / moviesPerPage);
   const startIndex = (currentPage - 1) * moviesPerPage;
   const endIndex = startIndex + moviesPerPage;
-  const currentMovies = dummyCarouselItems.slice(startIndex, endIndex);
+  const currentMovies = mockMovies.slice(startIndex, endIndex);
 
   // Generate random ratings for demo
   const generateRating = (index: number) => {
     const ratings = [8.5, 9.2, 7.8, 8.9, 9.1, 8.3, 7.5, 8.7, 9.0, 8.1];
     return ratings[index % ratings.length];
-  };
-
-  const handleViewDetails = (movieId: string) => {
-    console.log(`View details for movie: ${movieId}`);
   };
 
   const goToPage = (page: number) => {
@@ -136,11 +131,11 @@ export default function MovieList() {
         {currentMovies.map((movie, index) => (
           <MovieCard
             key={movie.id}
+            id={parseInt(movie.id)}
             title={movie.title}
             image={movie.image}
             description={movie.description}
             rating={generateRating(startIndex + index)}
-            onViewDetails={() => handleViewDetails(movie.id)}
           />
         ))}
       </div>

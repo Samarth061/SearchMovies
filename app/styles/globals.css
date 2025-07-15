@@ -14,6 +14,7 @@
   --text-primary: #ffffff;
   --text-secondary: #f0f0f0;
   --text-muted: #cccccc;
+  --text-description: #1a0000;
 
   /* Accent Colors - Electric bright reds */
   --accent-primary: #ff0000;
@@ -44,6 +45,7 @@
   --color-semantic-text-primary: var(--text-primary);
   --color-semantic-text-secondary: var(--text-secondary);
   --color-semantic-text-muted: var(--text-muted);
+  --color-semantic-text-description: var(--text-description);
 
   --color-semantic-accent-primary: var(--accent-primary);
   --color-semantic-accent-secondary: var(--accent-secondary);

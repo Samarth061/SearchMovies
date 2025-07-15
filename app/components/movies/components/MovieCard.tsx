@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface MovieCardProps {
   className?: string;
@@ -7,7 +8,7 @@ interface MovieCardProps {
   image: string;
   rating?: number;
   description?: string;
-  onViewDetails?: () => void;
+  id?: number;
 }
 
 export default function MovieCard({
@@ -16,7 +17,7 @@ export default function MovieCard({
   image,
   rating = 8.5,
   description = "No description available",
-  onViewDetails,
+  id,
 }: MovieCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -63,7 +64,7 @@ export default function MovieCard({
 
           {/* Default Title Overlay */}
           <div
-            className={`absolute bottom-3 left-3  bg-black/60 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg transition-all duration-300 ${
+            className={`absolute bottom-3 left-3  bg-semantic-background-elevated/60 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg transition-all duration-300 ${
               isHovered ? "opacity-0 translate-y-2" : "opacity-100"
             }`}
           >
@@ -74,7 +75,7 @@ export default function MovieCard({
 
           {/* Hover Overlay */}
           <div
-            className={`absolute inset-0 bg-semantic-background-elevated backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute inset-0 bg-semantic-background-elevated/50 backdrop-blur-sm transition-all duration-300 ${
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -91,12 +92,11 @@ export default function MovieCard({
               </div>
 
               {/* View Details Button */}
-              <button
-                onClick={onViewDetails}
-                className="mt-6 w-full bg-semantic-accent-primary hover:bg-semantic-accent-secondary hover:cursor-pointer text-semantic-text-primary font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-              >
-                View Details
-              </button>
+              <Link href={`/movie/${id}`}>
+                <button className="mt-6 w-full bg-semantic-accent-primary hover:bg-semantic-accent-secondary hover:cursor-pointer text-semantic-text-primary font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                  View Details
+                </button>
+              </Link>
             </div>
           </div>
         </div>

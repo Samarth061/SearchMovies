@@ -1,5 +1,5 @@
 html.theme1 {
-  /* Dark Fire Theme - Organized */
+  /* White Fire Theme - Organized */
   /* Backgrounds - Ultra-black progression */
   --bg-primary: #ffffff;
   --bg-secondary: #000000;
@@ -9,6 +9,7 @@ html.theme1 {
   /* Text Colors - Maximum contrast */
   --text-primary: #ffffff;
   --text-secondary: #f0f0f0;
+  --text-description: #1a0000;
   --text-muted: #cccccc;
 
   /* Accent Colors - Electric bright reds */
@@ -32,32 +33,32 @@ html.theme1 {
 }
 
 html.theme2 {
-  /* Dark Fire Theme - Organized */
-  /* Backgrounds - Ultra-black progression */
-  --bg-primary: #000000;
-  --bg-secondary: #000000;
-  --bg-button: #1a0000;
-  --bg-elevated: #ffffff;
+  /* Backgrounds - Light surfaces on deep dark base */
+  --bg-primary: #000000; /* Base background */
+  --bg-secondary: #ffffff; /* Inverted secondary */
+  --bg-button: #ffe6e6; /* Light red-tinted button background */
+  --bg-elevated: #f2f2f2; /* Elevated surface */
 
-  /* Text Colors - Maximum contrast */
-  --text-primary: #ffffff;
-  --text-secondary: #f0f0f0;
-  --text-muted: #cccccc;
+  /* Text Colors - Inverted to dark text */
+  --text-primary: #000000;
+  --text-secondary: #1a1a1a;
+  --text-muted: #333333;
+  --text-description: #f2f2f2;
 
-  /* Accent Colors - Electric bright reds */
+  /* Accent Colors - Keep consistent for theme identity */
   --accent-primary: #ff0000;
   --accent-secondary: #ff3333;
   --accent-warm: #ff6666;
   --accent-hot: #ff9999;
 
-  /* Borders - High contrast */
-  --border-default: #000000;
+  /* Borders - Light and consistent with theme */
+  --border-default: #ffffff;
   --border-focus: #ff0000;
   --border-hover: #ff3333;
 
-  /* Interactive States - Glowing effects */
-  --hover-overlay: rgba(255, 0, 0, 0.15);
-  --active-overlay: rgba(255, 0, 0, 0.25);
+  /* Interactive States - Lighter overlays for dark background */
+  --hover-overlay: rgba(255, 0, 0, 0.08);
+  --active-overlay: rgba(255, 0, 0, 0.18);
 
   /* Legacy support */
   --background: var(--bg-primary);

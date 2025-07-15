@@ -42,3 +42,4 @@ next-env.d.ts
 
 #Extra files
 CLAUDE.md
+/.claude

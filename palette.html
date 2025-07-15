@@ -6,10 +6,11 @@
     <title>Dark Mode Palette</title>
     <style>
       :root {
-        --bg-primary: white;
-        --bg-secondary: #0d0000;
-        --bg-card: #1a0000;
-        --bg-elevated: #220000;
+        /* Theme 1 (Default) - Dark Fire Theme */
+        --bg-primary: #ffffff;
+        --bg-secondary: #000000;
+        --bg-button: #1a0000;
+        --bg-elevated: #0d0000;
 
         /* Text Colors */
         --text-primary: #ffffff;
@@ -23,7 +24,7 @@
         --accent-hot: #ff9999;
 
         /* Borders */
-        --border-default: #1a0000;
+        --border-default: #000000;
         --border-focus: #ff0000;
         --border-hover: #ff3333;
 
@@ -34,6 +35,13 @@
         /* Legacy support */
         --background: var(--bg-primary);
         --foreground: var(--text-primary);
+      }
+
+      .theme2 {
+        /* Theme 2 - Alternative Dark Fire Theme */
+        --bg-primary: #000000;
+        --bg-elevated: #ffffff;
+        /* Other variables remain the same */
       }
 
       body {
@@ -85,23 +93,28 @@
   </head>
   <body>
     <h1>🎨 Dark Fire Theme Palette</h1>
+    
+    <div style="margin-bottom: 2rem; text-align: center;">
+      <button onclick="switchTheme('theme1')" style="margin: 0 0.5rem; padding: 0.5rem 1rem; background: var(--accent-primary); color: white; border: none; border-radius: 4px; cursor: pointer;">Theme 1</button>
+      <button onclick="switchTheme('theme2')" style="margin: 0 0.5rem; padding: 0.5rem 1rem; background: var(--accent-secondary); color: white; border: none; border-radius: 4px; cursor: pointer;">Theme 2</button>
+    </div>
 
     <h2>Backgrounds</h2>
     <div class="palette">
-      <div class="swatch" style="background: var(--bg-primary)">
-        <div>#000000</div>
+      <div class="swatch" style="background: var(--bg-primary); color: black;">
+        <div>#ffffff</div>
         <div class="label">bg-primary</div>
       </div>
       <div class="swatch" style="background: var(--bg-secondary)">
-        <div>#0d0000</div>
+        <div>#000000</div>
         <div class="label">bg-secondary</div>
       </div>
-      <div class="swatch" style="background: var(--bg-card)">
+      <div class="swatch" style="background: var(--bg-button)">
         <div>#1a0000</div>
-        <div class="label">bg-card</div>
+        <div class="label">bg-button</div>
       </div>
       <div class="swatch" style="background: var(--bg-elevated)">
-        <div>#220000</div>
+        <div>#0d0000</div>
         <div class="label">bg-elevated</div>
       </div>
     </div>
@@ -148,7 +161,7 @@
     <h2>Borders</h2>
     <div class="palette">
       <div class="swatch" style="background: var(--border-default)">
-        <div>#1a0000</div>
+        <div>#000000</div>
         <div class="label">border-default</div>
       </div>
       <div class="swatch" style="background: var(--border-focus)">
@@ -178,5 +191,15 @@
         <div class="label">active-overlay</div>
       </div>
     </div>
+
+    <script>
+      function switchTheme(theme) {
+        if (theme === 'theme2') {
+          document.documentElement.className = 'theme2';
+        } else {
+          document.documentElement.className = '';
+        }
+      }
+    </script>
   </body>
 </html>
