@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import Carousel from "./Carousel";
+import Carousel from "./components/Carousel";
 import {
   fallbackCarouselItems,
   featuredBackdropCarousel,
   getBackdropCarousel,
-} from "../../../data/carouselData";
-import { CarouselItem } from "./Carousel";
+} from "../../data/carouselData";
+import { CarouselItem } from "./components/Carousel";
 
 export function FeaturedMoviesCarousel() {
   const [items, setItems] = useState<CarouselItem[]>(featuredBackdropCarousel);

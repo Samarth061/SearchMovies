@@ -155,61 +155,6 @@ export const dummyCarouselItems: CarouselItem[] = [
   },
 ];
 
-// Alternative set with different genres
-export const actionMovieCarousel: CarouselItem[] = [
-  {
-    id: "action-4",
-    title: "The Dark Knight",
-    image: "https://image.tmdb.org/t/p/w780/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-  },
-  {
-    id: "action-1",
-    title: "John Wick",
-    image: "https://image.tmdb.org/t/p/w1280/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
-    description:
-      "An ex-hit-man comes out of retirement to track down the gangsters that took everything from him.",
-  },
-  {
-    id: "action-2",
-    title: "Mad Max: Fury Road",
-    image: "https://image.tmdb.org/t/p/w1280/hA2ple9q4qnwxp3hKVNhroipsir.jpg",
-    description:
-      "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland.",
-  },
-  {
-    id: "action-3",
-    title: "Die Hard",
-    image: "https://image.tmdb.org/t/p/w1280/yFihWxQcmqcaBR31QM6Y8gT6aYV.jpg",
-    description:
-      "A New York police officer tries to save his wife and several others taken hostage by German terrorists.",
-  },
-];
-
-// Horror movie set
-export const horrorMovieCarousel: CarouselItem[] = [
-  {
-    id: "horror-1",
-    title: "The Conjuring",
-    image: "https://image.tmdb.org/t/p/w1280/wVYREutTvI2tmxr6ujrHT704wGF.jpg",
-    description:
-      "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence.",
-  },
-  {
-    id: "horror-2",
-    title: "A Quiet Place",
-    image: "https://image.tmdb.org/t/p/w1280/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
-    description:
-      "A family is forced to live in silence while hiding from creatures that hunt by sound.",
-  },
-  {
-    id: "horror-3",
-    title: "Hereditary",
-    image: "https://image.tmdb.org/t/p/w1280/p81a0dIN8Fz6IDNMnzqCLSjOLqS.jpg",
-    description:
-      "A grieving family is haunted by tragedy and disturbing secrets in this psychological horror film.",
-  },
-];
-
 // Fallback data with placeholder images (for testing without internet)
 export const fallbackCarouselItems: CarouselItem[] = [
   {
@@ -234,20 +179,6 @@ export const fallbackCarouselItems: CarouselItem[] = [
       "This is a placeholder description for the third featured movie in our carousel.",
   },
 ];
-
-// Single item for testing minimal carousel
-export const singleItemCarousel: CarouselItem[] = [
-  {
-    id: "single-1",
-    title: "Solo Movie",
-    image: "https://image.tmdb.org/t/p/w1280/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-    description:
-      "This carousel has only one item to test single-item behavior.",
-  },
-];
-
-// Empty array for testing empty state
-export const emptyCarousel: CarouselItem[] = [];
 
 // New 16:9 backdrop dataset for standardized carousels
 export const featuredBackdropCarousel: CarouselItem[] = [
@@ -290,43 +221,5 @@ export const featuredBackdropCarousel: CarouselItem[] = [
     description:
       "An insomniac office worker and a soap maker form an underground fight club that evolves into something much more.",
     rating: 8.8,
-  },
-];
-
-export const actionBackdropCarousel: CarouselItem[] = [
-  {
-    id: "action-backdrop-1",
-    title: "John Wick",
-    image: "https://image.tmdb.org/t/p/w1280/umC04Cozevu8nn3JTDJ1pc7PVTn.jpg",
-    description:
-      "An ex-hit-man comes out of retirement to track down the gangsters that took everything from him.",
-  },
-  {
-    id: "action-backdrop-2",
-    title: "Mad Max: Fury Road",
-    image: "https://image.tmdb.org/t/p/w1280/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
-    description:
-      "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland.",
-  },
-  {
-    id: "action-backdrop-3",
-    title: "Die Hard",
-    image: "https://image.tmdb.org/t/p/w1280/aJCEIMX3xtXceC1xwz6kovowOqr.jpg",
-    description:
-      "A New York police officer tries to save his wife and several others taken hostage by German terrorists.",
-  },
-  {
-    id: "action-backdrop-4",
-    title: "Top Gun: Maverick",
-    image: "https://image.tmdb.org/t/p/w1280/odM92ap21JyfVfc4F9O68tFbdJY.jpg",
-    description:
-      "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past.",
-  },
-  {
-    id: "action-backdrop-5",
-    title: "Mission: Impossible - Fallout",
-    image: "https://image.tmdb.org/t/p/w1280/8yqzkoHrTdbuVl4h7lB3YGnYjh8.jpg",
-    description:
-      "Ethan Hunt and his team race against time after a mission goes wrong.",
   },
 ];

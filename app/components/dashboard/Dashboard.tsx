@@ -1,6 +1,6 @@
 "use client";
 
-import MovieList from "@/app/components/movies/components/MovieList";
+import MovieList from "@/app/components/movies/MovieList";
 import { ActionMoviesCarousel } from "../movies/components/MovieCarousels";
 
 export default function Dashboard() {

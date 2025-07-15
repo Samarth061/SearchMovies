@@ -1,7 +1,7 @@
 "use client";
 import SearchControls from "./components/layout/searchControls/SearchControls";
-import { FeaturedMoviesCarousel } from "./components/movies/components/MovieCarousels";
-import MovieList from "./components/movies/components/MovieList";
+import { FeaturedMoviesCarousel } from "./components/movies/MovieCarousels";
+import MovieList from "./components/movies/MovieList";
 
 export default function HomePage() {
   return (
