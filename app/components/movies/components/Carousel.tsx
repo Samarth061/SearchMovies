@@ -2,23 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-
-export interface CarouselItem {
-  id: string;
-  title: string;
-  image: string;
-  description?: string;
-  rating?: number;
-}
-
-interface CarouselProps {
-  items: CarouselItem[];
-  autoPlay?: boolean;
-  autoPlayInterval?: number;
-  showIndicators?: boolean;
-  showControls?: boolean;
-  className?: string;
-}
+import { CarouselProps } from "@/app/types/carouselMovie";
 
 export default function Carousel({
   items,
@@ -80,6 +64,7 @@ export default function Carousel({
             aria-hidden={index !== currentIndex}
           >
             <Image
+              priority
               src={item.image}
               alt={item.title}
               fill

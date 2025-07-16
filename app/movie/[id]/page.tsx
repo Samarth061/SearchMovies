@@ -1,11 +1,15 @@
 "use client";
-import { mockMovies } from "@/app/data/mockMovies";
-import ReactPlayer from "react-player";
+import { fallbackMovies } from "@/app/data/fallbackMovies";
 import Image from "next/image";
 import { useMovieDetails } from "@/app/hooks/useMovieDetails";
 import { useMovieTrailer } from "@/app/hooks/useMovieTrailer";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
-import { use } from "react";
+import { use, useState } from "react";
+import Cast from "../components/Cast";
+import MovieTrailer from "../components/MovieTrailer";
+import MovieDescription from "../components/MovieDescription";
+import MovieRatingGenre from "../components/MovieRatingGenre";
+import MovieInfoCard from "../components/MovieInfoCard";
 
 interface MoviePageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +18,8 @@ interface MoviePageProps {
 export default function MoviePage({ params }: MoviePageProps) {
   const { id } = use(params);
   const movieId = parseInt(id);
-  
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
   const {
     movie: movieDetails,
     isLoading: movieLoading,
@@ -23,26 +28,15 @@ export default function MoviePage({ params }: MoviePageProps) {
 
   const {
     trailerKey,
-    isLoading: trailerLoading,
-    isError: trailerError,
+    isLoading: _trailerLoading,
+    isError: _trailerError,
   } = useMovieTrailer(movieDetails ? movieDetails.id : 0);
 
-  // Find fallback movie from mock data
-  const fallbackMovie = mockMovies.find((m) => m.id === id);
+  // Find fallback movie from fallback data
+  const fallbackMovie = fallbackMovies.find((m) => m.id.toString() === id);
 
-  // Transform single movie object (not array)
-  const movie = movieDetails
-    ? {
-        id: movieDetails.id.toString(),
-        title: movieDetails.title,
-        image: `https://image.tmdb.org/t/p/w1280${movieDetails.poster_path}`,
-        description: movieDetails.overview,
-        rating: Math.ceil(movieDetails.vote_average * 10) / 10,
-        trailerYouTubeId: trailerKey,
-      }
-    : movieError && fallbackMovie
-    ? fallbackMovie
-    : null;
+  // Use TMDBMovie directly
+  const movie = movieDetails || (movieError && fallbackMovie) || null;
 
   const error = movieError ? "Failed to load movie from TMDB API" : null;
 
@@ -68,7 +62,8 @@ export default function MoviePage({ params }: MoviePageProps) {
             Movie Not Found
           </h1>
           <p className="text-semantic-text-secondary">
-            The movie you're looking for doesn't exist or couldn't be loaded.
+            The movie you&apos;re looking for doesn&apos;t exist or
+            couldn&apos;t be loaded.
           </p>
         </div>
       </div>
@@ -76,51 +71,47 @@ export default function MoviePage({ params }: MoviePageProps) {
   }
 
   return (
-    <div className="w-full max-w-[1440px] flex mx-auto mt-3">
+    <div className="flex-1 pt-4 pb-4 flex flex-col items-center justify-start space-y-6">
       {error && <ErrorMessage error={error} />}
 
-      <Image
-        src={movie.image}
-        alt={movie.title}
-        className="w-auto h-auto max-w-xl object-cover"
-        width={400}
-        height={600}
-      />
-      <div className="ml-6 flex flex-col">
-        <h1 className="text-3xl font-bold text-semantic-accent-secondary">
-          {movie.title}
-          {movie.rating}
-        </h1>
-        <p className="mt-4 text-semantic-text-description">
-          {movie.description}
-        </p>
-        {/* Trailer Section */}
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold text-semantic-text-primary mb-3">
-            Trailer
-          </h2>
-          {trailerLoading ? (
-            <div className="aspect-video w-full max-w-2xl bg-semantic-background-secondary rounded-lg flex items-center justify-center">
-              <p className="text-semantic-text-secondary">Loading trailer...</p>
-            </div>
-          ) : movie.trailerYouTubeId ? (
-            <div className="aspect-video w-full max-w-2xl">
-              <ReactPlayer
-                src={`https://www.youtube.com/watch?v=${movie.trailerYouTubeId}`}
-                playing={false}
-                controls
-                width="100%"
-                height="100%"
-              />
-            </div>
-          ) : (
-            <div className="aspect-video w-full max-w-2xl bg-semantic-background-secondary rounded-lg flex items-center justify-center">
-              <p className="text-semantic-text-secondary">
-                {trailerError ? "Failed to load trailer" : "No trailer available"}
-              </p>
-            </div>
-          )}
+      <div className="w-full max-w-[1440px] mx-auto aspect-[4/3] sm:aspect-[3/2] md:aspect-video relative">
+        <Image
+          src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+          alt={movie.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1440px"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 z-10 max-w-[1440px] w-full text-wrap item-center py-3 px-4 bg-semantic-background-primary/50 backdrop-blur-xl">
+          <MovieRatingGenre movie={movie} />
+          <MovieDescription
+            movie={movie}
+            isDescriptionExpanded={isDescriptionExpanded}
+            setIsDescriptionExpanded={setIsDescriptionExpanded}
+          />
         </div>
+      </div>
+
+      {/* Movie Info Card and Trailer Side by Side */}
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+        {/* Movie Info Card */}
+        <div className="w-full md:w-5/12 lg:w-1/3 flex justify-center md:justify-start">
+          <div className="w-full max-w-xs md:max-w-none">
+            <MovieInfoCard movie={movie} />
+          </div>
+        </div>
+
+        {/* Movie Trailer */}
+        <div className="w-full md:w-7/12 lg:w-2/3 flex items-start">
+          <div className="w-full">
+            <MovieTrailer trailerKey={trailerKey} />
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full max-w-[1440px] mx-auto">
+        <Cast id={movie.id} />
       </div>
     </div>
   );

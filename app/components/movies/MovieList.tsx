@@ -1,5 +1,5 @@
 "use client";
-import { mockMovies } from "@/app/data/mockMovies";
+import { fallbackMovies } from "@/app/data/fallbackMovies";
 import { useState, useEffect } from "react";
 import { useNowPlayingMovies } from "@/app/hooks/useNowPlayingMovies";
 import { useScreenSize } from "@/app/hooks/useScreenSize";
@@ -7,15 +7,7 @@ import MovieGridSkeleton from "@/app/skeleton/MovieGridSkeleton";
 import MovieGrid from "@/app/components/movies/components/MovieGrid";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
 import Pagination from "@/app/components/movies/components/Pagination";
-
-interface TMDBMovie {
-  id: number;
-  title: string;
-  poster_path: string;
-  overview: string;
-  vote_average: number;
-  trailerYouTubeId?: string;
-}
+import { TMDBMovie } from "@/app/types/TMDBmovie";
 
 export default function MovieList() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +18,7 @@ export default function MovieList() {
     movies: nowPlayingMovies,
     isLoading,
     isError,
-  } = useNowPlayingMovies(2);
+  } = useNowPlayingMovies(1);
 
   // Transform API data or fallback to mock data
   const movies = nowPlayingMovies
@@ -36,10 +28,9 @@ export default function MovieList() {
         image: `https://image.tmdb.org/t/p/w1280${movie.poster_path}`,
         description: movie.overview,
         rating: Math.ceil(movie.vote_average * 10) / 10,
-        trailerYouTubeId: movie.trailerYouTubeId,
       }))
     : isError
-    ? mockMovies
+    ? fallbackMovies
     : [];
 
   const error = isError ? "Failed to load movies from TMDB API" : null;

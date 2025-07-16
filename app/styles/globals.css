@@ -50,6 +50,7 @@
   --color-semantic-accent-primary: var(--accent-primary);
   --color-semantic-accent-secondary: var(--accent-secondary);
   --color-semantic-accent-warm: var(--accent-warm);
+  --color-semantic-accent-hot: var(--accent-hot);
 
   --color-semantic-border-default: var(--border-default);
   --color-semantic-border-focus: var(--border-focus);
@@ -95,4 +96,21 @@ body {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
+}
+
+/* 3D Flip Card Styles */
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.duration-600 {
+  transition-duration: 600ms;
 }

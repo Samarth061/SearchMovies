@@ -2,7 +2,6 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 export async function fetchFromTMDB(endpoint: string) {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-  console.log("TMDB API Key available:", !!apiKey);
 
   if (!apiKey) {
     throw new Error(
@@ -12,7 +11,6 @@ export async function fetchFromTMDB(endpoint: string) {
 
   const joiner = endpoint.includes("?") ? "&" : "?";
   const url = `${BASE_URL}${endpoint}${joiner}api_key=${apiKey}`;
-  console.log("TMDB API URL:", url.replace(apiKey, "***"));
   const res = await fetch(url);
 
   if (!res.ok) {
@@ -37,7 +35,7 @@ export async function getCurrentlyPlayingMovies(page = 1) {
 }
 
 export async function getMovieDetails(id: number) {
-  return fetchFromTMDB(`/movie/${id}`);
+  return fetchFromTMDB(`/movie/${id}?append_to_response=release_dates`);
 }
 
 export async function getMovieYoutubeTrailer(id: number) {
@@ -49,4 +47,16 @@ export async function getMovieYoutubeTrailer(id: number) {
   );
 
   return trailer?.key || null;
+}
+
+export async function getMovieCredits(id: number) {
+  return fetchFromTMDB(`/movie/${id}/credits`);
+}
+
+export async function getCastPhoto(id: number) {
+  return fetchFromTMDB(`/person/${id}/images`);
+}
+
+export async function getMovieReleaseData(id: number) {
+  return fetchFromTMDB(`/movie/${id}/release_dates`);
 }

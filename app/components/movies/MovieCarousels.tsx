@@ -6,32 +6,37 @@ import {
   featuredBackdropCarousel,
   getBackdropCarousel,
 } from "../../data/carouselData";
-import { CarouselItem } from "./components/Carousel";
+import { useTopRatedMovies } from "@/app/hooks/useTopRatedMovies";
+import { CarouselItem } from "@/app/types/carouselMovie";
+import { TMDBMovie } from "@/app/types/TMDBmovie";
 
 export function FeaturedMoviesCarousel() {
-  const [items, setItems] = useState<CarouselItem[]>(featuredBackdropCarousel);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    movies: topRatedMovies,
+    isLoading,
+    isError: error,
+  } = useTopRatedMovies(3, 10);
 
-  useEffect(() => {
-    async function loadMovies() {
-      try {
-        console.log("Attempting to load movies from TMDB API...");
-        const apiItems = await getBackdropCarousel();
-        console.log("Successfully loaded movies:", apiItems.length);
-        setItems(apiItems);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to load movies from API, using fallback:", err);
-        setError(err instanceof Error ? err.message : "Failed to load movies");
-        setItems(featuredBackdropCarousel);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  const movies: CarouselItem[] = topRatedMovies
+    ? topRatedMovies.map((movie: TMDBMovie) => {
+        // Use backdrop_path for carousels, fallback to poster_path, then to placeholder
+        const imagePath = movie.backdrop_path || movie.poster_path;
+        const imageUrl = imagePath
+          ? `https://image.tmdb.org/t/p/w1280${imagePath}`
+          : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"; // Fallback for missing images
 
-    loadMovies();
-  }, []);
+        return {
+          id: movie.id.toString(),
+          title: movie.title || "Unknown Title",
+          image: imageUrl,
+          description: movie.overview || "No description available",
+          rating: movie.vote_average
+            ? Math.ceil(movie.vote_average * 10) / 10
+            : 0,
+          trailerYouTubeId: undefined, // Remove hardcoded trailer - should be fetched separately
+        };
+      })
+    : fallbackCarouselItems;
 
   if (isLoading) {
     return (
@@ -52,14 +57,15 @@ export function FeaturedMoviesCarousel() {
       {error && (
         <div className="text-center p-2">
           <p className="text-semantic-text-secondary text-sm">
-            Using fallback movies (API: {error})
+            Using fallback movies (API:{" "}
+            {error?.message || "Failed to load top rated movies"})
           </p>
         </div>
       )}
       <div className="flex-1 p-3 md:p-2 flex items-center justify-center">
         <div className="w-full max-w-[1440px] mx-auto aspect-video">
           <Carousel
-            items={items}
+            items={movies}
             autoPlay={true}
             showIndicators={true}
             showControls={true}
