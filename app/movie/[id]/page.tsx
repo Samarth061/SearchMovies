@@ -1,10 +1,10 @@
 "use client";
 import { fallbackMovies } from "@/app/data/fallbackMovies";
 import Image from "next/image";
-import { useMovieDetails } from "@/app/hooks/useMovieDetails";
-import { useMovieTrailer } from "@/app/hooks/useMovieTrailer";
+import { useMovieDetails } from "@/app/hooks/movieHooks/useMovieDetails";
+import { useMovieTrailer } from "@/app/hooks/movieHooks/useMovieTrailer";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import Cast from "../components/Cast";
 import MovieTrailer from "../components/MovieTrailer";
 import MovieDescription from "../components/MovieDescription";
@@ -74,7 +74,7 @@ export default function MoviePage({ params }: MoviePageProps) {
     <div className="flex-1 pt-4 pb-4 flex flex-col items-center justify-start space-y-6">
       {error && <ErrorMessage error={error} />}
 
-      <div className="w-full max-w-[1440px] mx-auto aspect-[4/3] sm:aspect-[3/2] md:aspect-video relative">
+      <div className="relative w-full max-w-[1440px] mx-auto aspect-[4/3] sm:aspect-[3/2] md:aspect-video">
         <Image
           src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
           alt={movie.title}
@@ -94,7 +94,7 @@ export default function MoviePage({ params }: MoviePageProps) {
       </div>
 
       {/* Movie Info Card and Trailer Side by Side */}
-      <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 md:gap-8 items-center pt-2">
         {/* Movie Info Card */}
         <div className="w-full md:w-5/12 lg:w-1/3 flex justify-center md:justify-start">
           <div className="w-full max-w-xs md:max-w-none">

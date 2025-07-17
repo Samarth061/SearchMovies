@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getMovieReleaseData } from "../lib/tmdb";
+import { getMovieReleaseData } from "../../lib/tmdb";
 
 export function useMovieRating(id: number) {
   const { data, error, isLoading } = useSWR(["movieRating", id], () =>

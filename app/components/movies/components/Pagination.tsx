@@ -4,7 +4,11 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   const renderPagination = () => {
     const pages = [];
     const maxVisiblePages = 4;
@@ -32,7 +36,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
     }
 
     return (
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-2 mt-2">
         {/* Previous Arrow Button */}
         <button
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
@@ -67,9 +71,5 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
     );
   };
 
-  return (
-    <div className="mt-1 p-3">
-      {renderPagination()}
-    </div>
-  );
+  return <div className="mt-1 p-3">{renderPagination()}</div>;
 }

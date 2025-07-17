@@ -6,7 +6,7 @@ import {
   featuredBackdropCarousel,
   getBackdropCarousel,
 } from "../../data/carouselData";
-import { useTopRatedMovies } from "@/app/hooks/useTopRatedMovies";
+import { useTopRatedMovies } from "@/app/hooks/movieHooks/useTopRatedMovies";
 import { CarouselItem } from "@/app/types/carouselMovie";
 import { TMDBMovie } from "@/app/types/TMDBmovie";
 
@@ -15,7 +15,7 @@ export function FeaturedMoviesCarousel() {
     movies: topRatedMovies,
     isLoading,
     isError: error,
-  } = useTopRatedMovies(3, 10);
+  } = useTopRatedMovies(200, 10);
 
   const movies: CarouselItem[] = topRatedMovies
     ? topRatedMovies.map((movie: TMDBMovie) => {

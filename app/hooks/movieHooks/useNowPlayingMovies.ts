@@ -1,6 +1,6 @@
 // hooks/useNowPlayingMovies.ts
 import useSWR from "swr";
-import { getCurrentlyPlayingMovies } from "../lib/tmdb";
+import { getCurrentlyPlayingMovies } from "../../lib/tmdb";
 
 /**
  * Fetches and returns the currently playing movies from The Movie Database (TMDB).

@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getTopRatedMovies } from "../lib/tmdb";
+import { getTopRatedMovies } from "../../lib/tmdb";
 
 /**
  * Fetches the top rated movies from the TMDB API.

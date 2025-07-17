@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getCastPhoto } from "../lib/tmdb";
+import { getCastPhoto } from "../../lib/tmdb";
 
 export function useCastPhoto(id: number) {
   const { data, error, isLoading } = useSWR(["castPhoto", id], () =>

@@ -1,8 +1,8 @@
 "use client";
 import { fallbackMovies } from "@/app/data/fallbackMovies";
 import { useState, useEffect } from "react";
-import { useNowPlayingMovies } from "@/app/hooks/useNowPlayingMovies";
-import { useScreenSize } from "@/app/hooks/useScreenSize";
+import { useNowPlayingMovies } from "@/app/hooks/movieHooks/useNowPlayingMovies";
+import { useScreenSize } from "@/app/hooks/movieHooks/useScreenSize";
 import MovieGridSkeleton from "@/app/skeleton/MovieGridSkeleton";
 import MovieGrid from "@/app/components/movies/components/MovieGrid";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
@@ -18,7 +18,7 @@ export default function MovieList() {
     movies: nowPlayingMovies,
     isLoading,
     isError,
-  } = useNowPlayingMovies(1);
+  } = useNowPlayingMovies(20);
 
   // Transform API data or fallback to mock data
   const movies = nowPlayingMovies

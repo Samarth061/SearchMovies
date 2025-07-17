@@ -1,4 +1,4 @@
-import { useMovieCredits } from "@/app/hooks/useMovieCredits";
+import { useMovieCredits } from "@/app/hooks/movieHooks/useMovieCredits";
 import React from "react";
 import Image from "next/image";
 

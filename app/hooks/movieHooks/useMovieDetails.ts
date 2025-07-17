@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getMovieDetails } from "../lib/tmdb";
+import { getMovieDetails } from "../../lib/tmdb";
 
 /**
  * Fetches the details of a movie from The Movie Database (TMDB) and returns

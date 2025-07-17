@@ -9,8 +9,8 @@ import {
   FaCalendar,
   FaCertificate,
 } from "react-icons/fa";
-import { useMovieCredits } from "@/app/hooks/useMovieCredits";
-import { useMovieRating } from "@/app/hooks/useMovieRating";
+import { useMovieCredits } from "@/app/hooks/movieHooks/useMovieCredits";
+import { useMovieRating } from "@/app/hooks/movieHooks/useMovieRating";
 
 interface MovieInfoCardProps {
   movie: TMDBMovie;

@@ -12,7 +12,7 @@ export default function MovieDescription({
   isDescriptionExpanded,
   setIsDescriptionExpanded,
 }: MovieDescriptionProps) {
-  const truncateText = (text: string, maxLength: number = 100) => {
+  const truncateText = (text: string, maxLength: number = 60) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength).trim() + "...";
   };
@@ -26,7 +26,7 @@ export default function MovieDescription({
         </span>
         <span className="hidden md:inline">{movie.overview}</span>
       </p>
-      {movie.overview && movie.overview.length > 150 && (
+      {movie.overview && movie.overview.length > 60 && (
         <button
           onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
           className="md:hidden inline-flex items-center gap-1 text-semantic-accent-primary hover:text-semantic-accent-secondary text-sm font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-semantic-accent-primary/20 rounded-md px-2 py-1"
