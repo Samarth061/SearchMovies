@@ -54,23 +54,6 @@
 
   --color-semantic-border-default: var(--border-default);
   --color-semantic-border-focus: var(--border-focus);
-
-  /* Cinematic Colors */
-  --color-cinematic-deep-black: var(--bg-primary);
-  --color-cinematic-midnight-blue: var(--bg-secondary);
-  --color-cinematic-forest-green: var(--bg-card);
-  --color-cinematic-teal-dark: var(--bg-elevated);
-
-  --color-cinematic-warm-beige: var(--text-primary);
-  --color-cinematic-sage-green: var(--text-secondary);
-  --color-cinematic-muted-blue: var(--text-muted);
-
-  --color-cinematic-rust-orange: var(--accent-primary);
-  --color-cinematic-dark-brown: var(--accent-secondary);
-  --color-cinematic-sandstone: var(--accent-warm);
-
-  --color-cinematic-border-green: var(--border-default);
-  --color-cinematic-border-sage: var(--border-focus);
 }
 body {
   background: var(--bg-primary);
@@ -113,4 +96,16 @@ body {
 
 .duration-600 {
   transition-duration: 600ms;
+}
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Safari and Chrome */
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

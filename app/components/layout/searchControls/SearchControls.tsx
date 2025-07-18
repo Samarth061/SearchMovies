@@ -5,18 +5,21 @@ import React from "react";
 import GenreButton from "./component/GenreButton";
 import SearchBar from "./component/SearchBar";
 import { useSidebar } from "@/app/contexts/SidebarContext";
+import ScrollableContainer from "../../ui/ScrollableContainer";
 
 export default function SearchControls() {
   const { toggleSidebar } = useSidebar();
   return (
     <div className="flex items-center justify-between gap-4 py-3 lg:p-0">
       {/* Left side - Genre buttons */}
-      <div className="flex overflow-x-auto sm:overflow-visible gap-6 lg:gap-8 items-center lg:min-h-[110px] pb-2 sm:pb-0">
-        <div className="flex gap-4 justify-items-center">
-          {genres.map((genre, index) => (
-            <GenreButton key={index} genre={genre} />
-          ))}
-        </div>
+      <div className="w-3/4 md:w-1/2">
+        <ScrollableContainer scrollDistance={300}>
+          <div className="flex gap-4 items-center lg:min-h-[110px] sm:pb-0">
+            {genres.map((genre, index) => (
+              <GenreButton key={index} genre={genre.name} />
+            ))}
+          </div>
+        </ScrollableContainer>
       </div>
 
       {/* Right side - Search bar and hamburger */}

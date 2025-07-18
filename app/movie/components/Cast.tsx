@@ -1,6 +1,7 @@
 import { useMovieCredits } from "@/app/hooks/movieHooks/useMovieCredits";
 import React from "react";
 import Image from "next/image";
+import ScrollableContainer from "@/app/components/ui/ScrollableContainer";
 
 export default function Cast({ id }: { id: number }) {
   const { cast, isLoading, isError } = useMovieCredits(id);
@@ -47,9 +48,15 @@ export default function Cast({ id }: { id: number }) {
       <h2 className="text-3xl font-bold text-semantic-accent-primary mb-4">
         Cast
       </h2>
-      <div className="w-full flex flex-row gap-4 max-gap-6 justify-between overflow-auto pb-2">
+      <ScrollableContainer
+        scrollDistance={200}
+        containerClassName="flex w-full justify-between scroll-smooth overflow-hidden"
+        gap="gap-4"
+        padding="px-4"
+        ariaLabel="Movie cast members"
+      >
         {cast.slice(0, 8).map((actor: any) => (
-          <div key={actor.id} className="text-center">
+          <div key={actor.id} className=" text-center flex-shrink-0">
             <div className="relative w-30 h-30 mx-auto mb-2">
               <Image
                 src={
@@ -75,7 +82,7 @@ export default function Cast({ id }: { id: number }) {
             </p>
           </div>
         ))}
-      </div>
+      </ScrollableContainer>
     </div>
   );
 }

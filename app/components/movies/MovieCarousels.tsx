@@ -15,7 +15,7 @@ export function FeaturedMoviesCarousel() {
     movies: topRatedMovies,
     isLoading,
     isError: error,
-  } = useTopRatedMovies(200, 10);
+  } = useTopRatedMovies(1, 10); //Page 1, 10 movies
 
   const movies: CarouselItem[] = topRatedMovies
     ? topRatedMovies.map((movie: TMDBMovie) => {
@@ -36,7 +36,7 @@ export function FeaturedMoviesCarousel() {
           trailerYouTubeId: undefined, // Remove hardcoded trailer - should be fetched separately
         };
       })
-    : fallbackCarouselItems;
+    : featuredBackdropCarousel;
 
   if (isLoading) {
     return (

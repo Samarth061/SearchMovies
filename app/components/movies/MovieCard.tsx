@@ -37,7 +37,7 @@ export default function MovieCard({
     >
       {/* Main Card Container */}
       <div
-        className={`relativeshadow-lg hover:shadow-2xl transition-all duration-300 aspect-[11/16] sm:aspect-[2/3] md:aspect-[2/3] lg:aspect-[2/3] xl:aspect-[2/3] ${className}`}
+        className={`relative shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[11/16] sm:aspect-[2/3] md:aspect-[2/3] lg:aspect-[2/3] xl:aspect-[2/3] ${className}`}
       >
         {/* Movie Poster */}
         <div className="relative w-full h-full overflow-hidden">
@@ -65,11 +65,11 @@ export default function MovieCard({
 
           {/* Default Title Overlay */}
           <div
-            className={`absolute bottom-3 left-3  bg-semantic-background-elevated/60 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg transition-all duration-300 ${
+            className={`absolute bottom-3 left-3 bg-semantic-background-elevated/60 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg transition-all duration-300 w-max max-w-[80%] ${
               isHovered ? "opacity-0 translate-y-2" : "opacity-100"
             }`}
           >
-            <h3 className="text-semantic-text-muted text-lg font-bold truncate">
+            <h3 className="text-semantic-text-muted text-lg font-bold truncate max-w-full">
               {title}
             </h3>
           </div>
@@ -87,14 +87,16 @@ export default function MovieCard({
                   {title}
                 </h3>
                 {/* Description */}
-                <p className="text-semantic-text-secondary text-sm line-clamp-4 leading-relaxed">
+                <p
+                  className={`text-semantic-text-secondary text-sm leading-relaxed line-clamp-1 sm:line-clamp-4`}
+                >
                   {description}
                 </p>
               </div>
 
               {/* View Details Button */}
               <Link href={`/movie/${id}`}>
-                <button className="mt-6 w-full bg-semantic-accent-primary hover:bg-semantic-accent-secondary hover:cursor-pointer text-semantic-text-primary font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                <button className="text-xs lg:text-lg mt-6 w-full bg-semantic-accent-primary hover:bg-semantic-accent-secondary hover:cursor-pointer text-semantic-text-primary font-semibold py-3 px-2 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
                   View Details
                 </button>
               </Link>

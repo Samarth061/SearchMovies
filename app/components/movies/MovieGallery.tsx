@@ -2,7 +2,7 @@
 import { fallbackMovies } from "@/app/data/fallbackMovies";
 import { useState, useEffect } from "react";
 import { useNowPlayingMovies } from "@/app/hooks/movieHooks/useNowPlayingMovies";
-import { useScreenSize } from "@/app/hooks/movieHooks/useScreenSize";
+import { useBreakpoints } from "@/app/hooks/useBreakpoints";
 import MovieGridSkeleton from "@/app/skeleton/MovieGridSkeleton";
 import MovieGrid from "@/app/components/movies/components/MovieGrid";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
@@ -11,14 +11,15 @@ import { TMDBMovie } from "@/app/types/TMDBmovie";
 
 export default function MovieList() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { screenSize, moviesPerPage } = useScreenSize();
+  const { screenSize, getMoviesPerPage } = useBreakpoints();
+  const moviesPerPage = getMoviesPerPage();
 
   // Use custom hook for now playing movies
   const {
     movies: nowPlayingMovies,
     isLoading,
     isError,
-  } = useNowPlayingMovies(20);
+  } = useNowPlayingMovies(1); // Page 2
 
   // Transform API data or fallback to mock data
   const movies = nowPlayingMovies

@@ -78,12 +78,12 @@ export default function Carousel({
             <div className="absolute inset-0 bg-gradient-to-t from-semantic-background-primary/20 via-transparent to-transparent pointer-events-none" />
 
             {/* Title and Description Overlay - Bottom Left */}
-            <div className="absolute bottom-10 left-8 max-w-xs lg:max-w-xl backdrop-blur-md bg-black/80 rounded-lg p-4">
-              <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-bold line-clamp-1">
+            <div className="absolute bottom-5 left-4 sm:bottom-10 sm:left-8 max-w-xs lg:max-w-xl backdrop-blur-md bg-black/80 rounded-lg p-4">
+              <h3 className="text-white text-xs sm:text-lg md:text-xl lg:text-2xl font-bold line-clamp-1">
                 {item.title}
               </h3>
               {item.description && (
-                <p className="hidden lg:block text-white/90 text-base md:text-lg lg:text-xl mt-2 line-clamp-2">
+                <p className="hidden lg:block text-white/90 text-sm md:text-base lg:text-lg mt-2 line-clamp-2">
                   {item.description}
                 </p>
               )}
@@ -94,7 +94,7 @@ export default function Carousel({
               <div className="absolute top-4 right-4 backdrop-blur-md bg-black/80 rounded-lg px-3 py-2">
                 <div className="flex items-center space-x-1">
                   <svg
-                    className="w-4 h-4 text-yellow-400"
+                    className="w-3 h-3 md:w-4 md:h-4 text-yellow-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -112,12 +112,12 @@ export default function Carousel({
 
       {/* Slider indicators */}
       {showIndicators && items.length > 1 && (
-        <div className="absolute z-30 flex -translate-x-1/2 bottom-6 left-1/2 space-x-3">
+        <div className="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3">
           {items.map((_, index) => (
             <button
               key={index}
               type="button"
-              className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+              className={`hidden sm:block w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors duration-200 ${
                 index === currentIndex
                   ? "bg-semantic-accent-primary"
                   : "bg-semantic-text-muted hover:bg-semantic-text-secondary"
@@ -138,9 +138,9 @@ export default function Carousel({
           onClick={prevSlide}
           aria-label="Previous slide"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
+          <span className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-semantic-background-secondary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
             <svg
-              className="w-4 h-4 text-semantic-text-primary"
+              className="w-3 h-3 md:w-4 md:h-4 text-semantic-text-primary"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -167,9 +167,9 @@ export default function Carousel({
           onClick={nextSlide}
           aria-label="Next slide"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 bg-semantic-background-primary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
+          <span className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-semantic-background-secondary/30 group-hover:bg-semantic-background-primary/50 group-focus:ring-4 group-focus:ring-semantic-accent-primary/50 group-focus:outline-none transition-colors duration-200">
             <svg
-              className="w-4 h-4 text-semantic-text-primary"
+              className="w-3 h-3 md:w-4 md:h-4 text-semantic-text-primary"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
