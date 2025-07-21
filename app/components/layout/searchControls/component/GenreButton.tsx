@@ -1,24 +1,42 @@
-import React from "react";
+"use client";
+
+import genres from "@/app/data/genreData";
 
 interface GenreButtonProps {
   genre: string;
+  genreArray: number[];
+  setGenreArray: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-export default function GenreButton({ genre }: GenreButtonProps) {
+export default function GenreButton({
+  genre,
+  genreArray,
+  setGenreArray,
+}: GenreButtonProps) {
+  const genreMap = new Map(genres.map((g) => [g.name, g.id]));
+  const id = genreMap.get(genre);
+
+  if (id === undefined) return null;
+
+  const isSelected = genreArray.includes(id);
+
+  const handleClick = () => {
+    setGenreArray((prev) =>
+      prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]
+    );
+  };
+
   return (
     <button
-      className="
-        w-fit max-w-[120px] sm:max-w-[140px] md:max-w-[200px] 
-        max-h-[36px] md:max-h-[50px]
-        px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 
-        text-xs sm:text-sm md:text-base 
-        font-geist-sans 
-        bg-semantic-background-button text-semantic-text-secondary
-        border-2 border-transparent
-        hover:bg-semantic-accent-secondary hover:border-semantic-accent-hot hover:cursor-pointer
-        transition duration-200
-        truncate
-      "
+      className={`px-3 py-2 text-sm lg:text-lg 
+      ${
+        isSelected
+          ? "bg-semantic-accent-secondary"
+          : "bg-semantic-background-button hover:bg-semantic-accent-secondary"
+      } 
+      text-semantic-text-secondary hover:cursor-pointer border-2 border-transparent hover:border-semantic-accent-hot
+      transition duration-200 truncate rounded snap-start flex-shrink-0`}
+      onClick={handleClick}
     >
       {genre}
     </button>

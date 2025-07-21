@@ -109,3 +109,12 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Scroll Snap Utilities */
+.scroll-snap-type-x {
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-snap-align-start {
+  scroll-snap-align: start;
+}

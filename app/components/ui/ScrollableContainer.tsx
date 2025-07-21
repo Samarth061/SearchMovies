@@ -18,7 +18,7 @@ export default function ScrollableContainer({
   gap = "gap-3",
   padding = "px-2",
   buttonClassName = "flex items-center justify-center h-full cursor-pointer group focus:outline-none transition-opacity duration-200",
-  containerClassName = "flex scroll-smooth overflow-x-auto scrollbar-hide",
+  containerClassName = "flex scroll-smooth overflow-x-auto scrollbar-hide snap-x snap-mandatory",
   showArrows = true,
   ariaLabel = "Scrollable content",
 }: ScrollableContainerProps) {

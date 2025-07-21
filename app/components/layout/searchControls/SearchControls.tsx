@@ -7,16 +7,21 @@ import SearchBar from "./component/SearchBar";
 import { useSidebar } from "@/app/contexts/SidebarContext";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 
-export default function SearchControls() {
+export default function SearchControls({ genreArray, setGenreArray }: any) {
   const { toggleSidebar } = useSidebar();
   return (
     <div className="flex items-center justify-between gap-4 py-3 lg:p-0">
       {/* Left side - Genre buttons */}
-      <div className="w-3/4 md:w-1/2">
+      <div className="w-auto overflow-x-auto w-max-[400px]">
         <ScrollableContainer scrollDistance={300}>
           <div className="flex gap-4 items-center lg:min-h-[110px] sm:pb-0">
             {genres.map((genre, index) => (
-              <GenreButton key={index} genre={genre.name} />
+              <GenreButton
+                key={index}
+                genre={genre.name}
+                genreArray={genreArray}
+                setGenreArray={setGenreArray}
+              />
             ))}
           </div>
         </ScrollableContainer>

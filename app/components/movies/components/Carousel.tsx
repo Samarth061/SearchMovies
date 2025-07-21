@@ -120,7 +120,7 @@ export default function Carousel({
               className={`hidden sm:block w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors duration-200 ${
                 index === currentIndex
                   ? "bg-semantic-accent-primary"
-                  : "bg-semantic-text-muted hover:bg-semantic-text-secondary"
+                  : "bg-semantic-background-elevated hover:bg-semantic-accent-warm"
               }`}
               aria-current={index === currentIndex}
               aria-label={`Go to slide ${index + 1}`}

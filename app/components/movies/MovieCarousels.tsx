@@ -1,10 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
 import Carousel from "./components/Carousel";
 import {
   fallbackCarouselItems,
   featuredBackdropCarousel,
-  getBackdropCarousel,
 } from "../../data/carouselData";
 import { useTopRatedMovies } from "@/app/hooks/movieHooks/useTopRatedMovies";
 import { CarouselItem } from "@/app/types/carouselMovie";

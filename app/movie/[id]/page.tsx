@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useMovieDetails } from "@/app/hooks/movieHooks/useMovieDetails";
 import { useMovieTrailer } from "@/app/hooks/movieHooks/useMovieTrailer";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
-import { use, useState, useEffect } from "react";
+import { use, useState } from "react";
 import Cast from "../components/Cast";
 import MovieTrailer from "../components/MovieTrailer";
 import MovieDescription from "../components/MovieDescription";

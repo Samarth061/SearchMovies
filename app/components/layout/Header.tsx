@@ -5,7 +5,7 @@ import ThemeToggle from "./ThemeToggle";
 import { useBreakpoints } from "@/app/hooks/useBreakpoints";
 
 export default function Header() {
-  const { isMobile, isTablet, isDesktop } = useBreakpoints();
+  const { isMobile } = useBreakpoints();
 
   return (
     <header className="max-w-[1440px] w-full mx-auto bg-semantic-background-secondary/40 hover:bg-semantic-background-secondary transition-colors duration-400 ease-in-out backdrop-blur-sm shadow-semantic-border-default/20 shadow-lg sticky top-0 z-50">

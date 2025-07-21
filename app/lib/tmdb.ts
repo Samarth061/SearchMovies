@@ -60,3 +60,14 @@ export async function getCastPhoto(id: number) {
 export async function getMovieReleaseData(id: number) {
   return fetchFromTMDB(`/movie/${id}/release_dates`);
 }
+
+export async function getMoviesByGenre(genreId: number[]) {
+  const genreQuery = genreId.join(",");
+  const data = await fetchFromTMDB(`/discover/movie?with_genres=${genreQuery}`);
+  return data.results;
+}
+
+export async function getMovieBySearch(movieName: string) {
+  const movie = await fetchFromTMDB(`/search/movie?query=${movieName}`);
+  return movie;
+}
