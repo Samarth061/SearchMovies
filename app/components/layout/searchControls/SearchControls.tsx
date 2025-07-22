@@ -1,14 +1,19 @@
 "use client";
 
 import genres from "@/app/data/genreData";
-import React from "react";
 import GenreButton from "./component/GenreButton";
 import SearchBar from "./component/SearchBar";
-import { useSidebar } from "@/app/contexts/SidebarContext";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 
-export default function SearchControls({ genreArray, setGenreArray }: any) {
-  const { toggleSidebar } = useSidebar();
+export default function SearchControls({
+  genreArray,
+  setGenreArray,
+  searchValue,
+  setSearchValue,
+  showMovies,
+  setShowMovies,
+  toggleSidebar,
+}: any) {
   return (
     <div className="flex items-center justify-between gap-4 py-3 lg:p-0">
       {/* Left side - Genre buttons */}
@@ -31,12 +36,15 @@ export default function SearchControls({ genreArray, setGenreArray }: any) {
       <div className="flex items-center gap-3">
         {/* Search bar - visible on large screens only */}
         <div className="hidden lg:block min-w-[300px] max-w-[400px]">
-          <SearchBar />
+          <SearchBar
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
         </div>
 
         {/* Hamburger button */}
         <button
-          onClick={toggleSidebar}
+          onClick={toggleSidebar || (() => {})}
           className="p-2 rounded-lg transition-all duration-200 group hover:bg-semantic-background-elevated"
           aria-label="Open filters and search"
         >

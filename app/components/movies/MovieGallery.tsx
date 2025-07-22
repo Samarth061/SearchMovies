@@ -3,15 +3,21 @@ import { fallbackMovies } from "@/app/data/fallbackMovies";
 import { useState, useEffect } from "react";
 import { useNowPlayingMovies } from "@/app/hooks/movieHooks/useNowPlayingMovies";
 import { useBreakpoints } from "@/app/hooks/useBreakpoints";
+import { usePagination } from "@/app/hooks/usePagination";
 import MovieGridSkeleton from "@/app/components/movies/skeleton/MovieGridSkeleton";
 import MovieGrid from "@/app/components/movies/components/MovieGrid";
 import ErrorMessage from "@/app/components/movies/components/ErrorMessage";
 import Pagination from "@/app/components/movies/components/Pagination";
 import { TMDBMovie } from "@/app/types/TMDBmovie";
 import { useMoviesByGenre } from "@/app/hooks/movieHooks/useMoviesByGenre";
+import { useMoviesBySearch } from "@/app/hooks/movieHooks/useMoviesBySearch";
 
-export default function MovieGallery({ genreArray }: any) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function MovieGallery({
+  genreArray,
+  searchValue,
+  showMovies,
+  setShowMovies,
+}: any) {
   const [artificialLoading, setArtificialLoading] = useState(true);
   const { screenSize, getMoviesPerPage } = useBreakpoints();
   const moviesPerPage = getMoviesPerPage();
@@ -20,7 +26,7 @@ export default function MovieGallery({ genreArray }: any) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setArtificialLoading(false);
-    }, 3000); // 2.5 second delay
+    }, 2000); // 2 second delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -38,22 +44,42 @@ export default function MovieGallery({ genreArray }: any) {
     isError: genreFilterMoviesError,
   } = useMoviesByGenre(genreArray);
 
+  const {
+    search: searchMovies,
+    isLoading: searchMoviesLoading,
+    isError: searchMoviesError,
+  } = useMoviesBySearch(searchValue);
+
+  useEffect(() => {
+    const rawMovies =
+      searchMovies?.length > 0
+        ? searchMovies
+        : genreArray.length > 0
+        ? genreFilterMovies || []
+        : nowPlayingMovies || [];
+
+    setShowMovies(rawMovies);
+  }, [searchMovies, genreArray, genreFilterMovies, nowPlayingMovies]);
+
   const isLoading =
-    artificialLoading || nowPlayingMoviesLoading || genreFilterMoviesLoading;
-  const isError = nowPlayingMoviesError || genreFilterMoviesError;
+    artificialLoading ||
+    nowPlayingMoviesLoading ||
+    searchMoviesLoading ||
+    genreFilterMoviesLoading;
+
+  const isError =
+    nowPlayingMoviesError || genreFilterMoviesError || searchMoviesError;
   const errorMessage = nowPlayingMoviesError
     ? "Failed to load movies from TMDB API"
     : genreFilterMoviesError
     ? "Failed to filter genres"
+    : searchMoviesError
+    ? "Failed to search movies"
     : null;
 
-  // Transform API data or fallback to mock data
-  const rawMovies =
-    genreArray.length > 0 ? genreFilterMovies || [] : nowPlayingMovies || [];
-
   const mapMovies =
-    rawMovies.length > 0
-      ? rawMovies.map((movie: TMDBMovie) => ({
+    showMovies.length > 0
+      ? showMovies.map((movie: TMDBMovie) => ({
           id: movie.id.toString(),
           title: movie.title,
           image: `https://image.tmdb.org/t/p/w1280${movie.poster_path}`,
@@ -64,25 +90,22 @@ export default function MovieGallery({ genreArray }: any) {
       ? fallbackMovies
       : [];
 
-  // Reset current page when screen size changes (to prevent out-of-bounds issues)
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [screenSize]);
-
-  // Calculate pagination
-  const totalPages = Math.ceil(mapMovies.length / moviesPerPage);
-  const startIndex = (currentPage - 1) * moviesPerPage;
-  const endIndex = startIndex + moviesPerPage;
-  const currentMovies = mapMovies.slice(startIndex, endIndex);
-
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-  };
+  // Use pagination hook
+  const {
+    currentPage,
+    totalPages,
+    currentItems: currentMovies,
+    goToPage,
+  } = usePagination({
+    items: mapMovies,
+    itemsPerPage: moviesPerPage,
+    resetTrigger: screenSize,
+  });
 
   if (isLoading) {
     return <MovieGridSkeleton />;
   }
-
+  // console.log(showMovies);
   return (
     <div className="h-full w-full max-w-[1440px] flex flex-col ">
       {/* API Status Message */}

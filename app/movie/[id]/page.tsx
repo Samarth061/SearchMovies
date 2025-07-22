@@ -10,6 +10,7 @@ import MovieTrailer from "../components/MovieTrailer";
 import MovieDescription from "../components/MovieDescription";
 import MovieRatingGenre from "../components/MovieRatingGenre";
 import MovieInfoCard from "../components/MovieInfoCard";
+import MovieDetailSkeleton from "@/app/movie/skeleton/MovieDetailSkeleton";
 
 interface MoviePageProps {
   params: Promise<{ id: string }>;
@@ -42,15 +43,7 @@ export default function MoviePage({ params }: MoviePageProps) {
 
   // Loading state
   if (movieLoading) {
-    return (
-      <div className="w-full max-w-[1440px] flex mx-auto mt-3 items-center justify-center">
-        <div className="text-center">
-          <p className="text-semantic-text-secondary text-lg">
-            Loading movie details...
-          </p>
-        </div>
-      </div>
-    );
+    return <MovieDetailSkeleton />;
   }
 
   // Error state with no fallback movie

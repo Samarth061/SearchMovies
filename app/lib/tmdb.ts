@@ -69,5 +69,5 @@ export async function getMoviesByGenre(genreId: number[]) {
 
 export async function getMovieBySearch(movieName: string) {
   const movie = await fetchFromTMDB(`/search/movie?query=${movieName}`);
-  return movie;
+  return movie.results;
 }

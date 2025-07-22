@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { useState, useEffect } from "react";
 import { getMovieDetails } from "../../lib/tmdb";
 
 /**
@@ -10,13 +11,34 @@ import { getMovieDetails } from "../../lib/tmdb";
  * @throws An error if the API request fails.
  */
 export function useMovieDetails(id: number) {
-  const { data, error, isLoading } = useSWR(["movieDetails", id], () =>
-    getMovieDetails(id)
+  const [artificialLoading, setArtificialLoading] = useState(true);
+  
+  const { data, error, isLoading } = useSWR(
+    ["movieDetails", id], 
+    () => getMovieDetails(id),
+    {
+      revalidateOnMount: true,
+      revalidateOnFocus: false,
+    }
   );
+
+  // Add minimum loading duration for better UX
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setArtificialLoading(false);
+    }, 800); // 800ms minimum loading time
+
+    return () => clearTimeout(timer);
+  }, [id]);
+
+  // Reset artificial loading when ID changes
+  useEffect(() => {
+    setArtificialLoading(true);
+  }, [id]);
 
   return {
     movie: data,
-    isLoading,
+    isLoading: isLoading || artificialLoading,
     isError: error,
   };
 }
