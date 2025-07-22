@@ -4,7 +4,7 @@ import SearchControls from "./components/layout/searchControls/SearchControls";
 import { FeaturedMoviesCarousel } from "./components/movies/MovieCarousels";
 import MovieGallery from "./components/movies/MovieGallery";
 
-export default function HomePage({ toggleSidebar }: { toggleSidebar?: () => void }) {
+export default function HomePage() {
   const [duration, setDuration] = useState(120);
   const [rating, setRating] = useState(0);
   // stores movies in TMDB API format not TMDB format
@@ -26,7 +26,6 @@ export default function HomePage({ toggleSidebar }: { toggleSidebar?: () => void
           setSearchValue={setSearchValue}
           showMovies={showMovies}
           setShowMovies={setShowMovies}
-          toggleSidebar={toggleSidebar}
         />
         <MovieGallery
           genreArray={genreArray}

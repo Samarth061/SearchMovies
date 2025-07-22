@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import FlyoutMenu from "./searchControls/component/FlyoutMenu";
 import SearchBar from "./searchControls/component/SearchBar";
 
@@ -10,6 +10,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const [sidebarSearchValue, setSidebarSearchValue] = useState("");
   return (
     <>
       {/* Backdrop overlay for mobile/tablet screens */}
@@ -60,7 +61,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="flex flex-col h-full overflow-y-auto">
           {/* Search Bar - only visible on mobile/tablet */}
           <div className="lg:hidden p-4 border-b border-semantic-border-default">
-            <SearchBar />
+            <SearchBar 
+              searchValue={sidebarSearchValue}
+              setSearchValue={setSidebarSearchValue}
+            />
           </div>
 
           {/* Filter Menu Content */}
