@@ -1,16 +1,22 @@
 "use client";
-import { useState } from "react";
 import SearchControls from "./components/layout/searchControls/SearchControls";
 import { FeaturedMoviesCarousel } from "./components/movies/MovieCarousels";
 import MovieGallery from "./components/movies/MovieGallery";
+import { useMovieFilters } from "./contexts/MovieFiltersContext";
 
 export default function HomePage() {
-  const [duration, setDuration] = useState(120);
-  const [rating, setRating] = useState(0);
-  // stores movies in TMDB API format not TMDB format
-  const [showMovies, setShowMovies] = useState([]);
-  const [genreArray, setGenreArray] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  const {
+    duration,
+    setDuration,
+    rawMovies,
+    setRawMovies,
+    showMovies,
+    setShowMovies,
+    genreArray,
+    setGenreArray,
+    searchValue,
+    setSearchValue,
+  } = useMovieFilters();
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -28,10 +34,12 @@ export default function HomePage() {
           setShowMovies={setShowMovies}
         />
         <MovieGallery
-          genreArray={genreArray}
-          searchValue={searchValue}
+          rawMovies={rawMovies}
+          setRawMovies={setRawMovies}
           showMovies={showMovies}
           setShowMovies={setShowMovies}
+          genreArray={genreArray}
+          searchValue={searchValue}
         />
       </div>
     </div>

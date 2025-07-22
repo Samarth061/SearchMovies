@@ -13,10 +13,12 @@ import { useMoviesByGenre } from "@/app/hooks/movieHooks/useMoviesByGenre";
 import { useMoviesBySearch } from "@/app/hooks/movieHooks/useMoviesBySearch";
 
 export default function MovieGallery({
-  genreArray,
-  searchValue,
+  rawMovies,
+  setRawMovies,
   showMovies,
   setShowMovies,
+  genreArray,
+  searchValue,
 }: any) {
   const [artificialLoading, setArtificialLoading] = useState(true);
   const { screenSize, getMoviesPerPage } = useBreakpoints();
@@ -51,15 +53,19 @@ export default function MovieGallery({
   } = useMoviesBySearch(searchValue);
 
   useEffect(() => {
-    const rawMovies =
+    const newRawMovies =
       searchMovies?.length > 0
         ? searchMovies
         : genreArray.length > 0
         ? genreFilterMovies || []
         : nowPlayingMovies || [];
 
-    setShowMovies(rawMovies);
+    setRawMovies(newRawMovies);
   }, [searchMovies, genreArray, genreFilterMovies, nowPlayingMovies]);
+
+  useEffect(() => {
+    setShowMovies(rawMovies);
+  }, [rawMovies]);
 
   const isLoading =
     artificialLoading ||
@@ -105,7 +111,7 @@ export default function MovieGallery({
   if (isLoading) {
     return <MovieGridSkeleton />;
   }
-  // console.log(showMovies);
+  console.log(showMovies);
   return (
     <div className="h-full w-full max-w-[1440px] flex flex-col ">
       {/* API Status Message */}

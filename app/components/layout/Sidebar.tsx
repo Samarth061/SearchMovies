@@ -3,21 +3,31 @@
 import React, { useState } from "react";
 import FlyoutMenu from "./searchControls/component/FlyoutMenu";
 import SearchBar from "./searchControls/component/SearchBar";
+import { useSidebar } from "@/app/contexts/SidebarContext";
+import { useMovieFilters } from "@/app/contexts/MovieFiltersContext";
 
-interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+export default function Sidebar() {
+  const { isSidebarOpen, closeSidebar } = useSidebar();
+  const {
+    duration,
+    setDuration,
+    rating,
+    setRating,
+    rawMovies,
+    setRawMovies,
+    showMovies,
+    setShowMovies,
+    searchValue,
+    setSearchValue,
+  } = useMovieFilters();
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const [sidebarSearchValue, setSidebarSearchValue] = useState("");
   return (
     <>
       {/* Backdrop overlay for mobile/tablet screens */}
-      {isOpen && (
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
-          onClick={onClose}
+          onClick={closeSidebar}
           aria-label="Close sidebar"
         />
       )}
@@ -25,7 +35,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full bg-semantic-background-secondary z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
         } ${
           // Responsive width - narrower on mobile, wider on larger screens
           "w-80 sm:w-96 lg:w-80"
@@ -37,7 +47,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             Filters & Search
           </h2>
           <button
-            onClick={onClose}
+            onClick={closeSidebar}
             className="p-2 rounded-lg hover:bg-semantic-background-elevated transition-colors duration-200"
             aria-label="Close sidebar"
           >
@@ -61,15 +71,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="flex flex-col h-full overflow-y-auto">
           {/* Search Bar - only visible on mobile/tablet */}
           <div className="lg:hidden p-4 border-b border-semantic-border-default">
-            <SearchBar 
-              searchValue={sidebarSearchValue}
-              setSearchValue={setSidebarSearchValue}
+            <SearchBar
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
             />
           </div>
 
           {/* Filter Menu Content */}
           <div className="flex-1 p-4">
-            <FlyoutMenu isOpen={isOpen} />
+            <FlyoutMenu
+              rawMovies={rawMovies}
+              setShowMovies={setShowMovies}
+              setRating={setRating}
+            />
           </div>
         </div>
       </div>

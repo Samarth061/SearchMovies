@@ -5,10 +5,10 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Sidebar from "./components/layout/Sidebar";
 import { SidebarProvider, useSidebar } from "./contexts/SidebarContext";
+import { MovieFiltersProvider } from "./contexts/MovieFiltersContext";
 
 function LayoutClientContent({ children }: { children: React.ReactNode }) {
   const [isInitialized] = useState(true);
-  const { isSidebarOpen, closeSidebar } = useSidebar();
 
   return (
     <>
@@ -23,7 +23,7 @@ function LayoutClientContent({ children }: { children: React.ReactNode }) {
         )}
       </main>
       <Footer />
-      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+      <Sidebar />
     </>
   );
 }
@@ -34,8 +34,10 @@ export default function LayoutClient({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <LayoutClientContent>{children}</LayoutClientContent>
-    </SidebarProvider>
+    <MovieFiltersProvider>
+      <SidebarProvider>
+        <LayoutClientContent>{children}</LayoutClientContent>
+      </SidebarProvider>
+    </MovieFiltersProvider>
   );
 }
