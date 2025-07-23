@@ -12,6 +12,15 @@ import { TMDBMovie } from "@/app/types/TMDBmovie";
 import { useMoviesByGenre } from "@/app/hooks/movieHooks/useMoviesByGenre";
 import { useMoviesBySearch } from "@/app/hooks/movieHooks/useMoviesBySearch";
 
+interface MovieGalleryProps {
+  rawMovies: TMDBMovie[];
+  setRawMovies: React.Dispatch<React.SetStateAction<TMDBMovie[]>>;
+  showMovies: TMDBMovie[];
+  setShowMovies: React.Dispatch<React.SetStateAction<TMDBMovie[]>>;
+  genreArray: number[];
+  searchValue: string;
+}
+
 export default function MovieGallery({
   rawMovies,
   setRawMovies,
@@ -19,16 +28,16 @@ export default function MovieGallery({
   setShowMovies,
   genreArray,
   searchValue,
-}: any) {
+}: MovieGalleryProps) {
   const [artificialLoading, setArtificialLoading] = useState(true);
-  const { screenSize, getMoviesPerPage } = useBreakpoints();
-  const moviesPerPage = getMoviesPerPage();
+  const [apiPage, setApiPage] = useState(1);
+  const { screenSize } = useBreakpoints();
 
   // Simulate loading delay to show skeleton
   useEffect(() => {
     const timer = setTimeout(() => {
       setArtificialLoading(false);
-    }, 2000); // 2 second delay
+    }, 1000); // 1 second delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -38,34 +47,35 @@ export default function MovieGallery({
     movies: nowPlayingMovies,
     isLoading: nowPlayingMoviesLoading,
     isError: nowPlayingMoviesError,
-  } = useNowPlayingMovies(1); // Page 1
+  } = useNowPlayingMovies(apiPage);
 
   const {
     data: genreFilterMovies,
     isLoading: genreFilterMoviesLoading,
     isError: genreFilterMoviesError,
-  } = useMoviesByGenre(genreArray);
+  } = useMoviesByGenre(genreArray, apiPage);
 
   const {
     search: searchMovies,
     isLoading: searchMoviesLoading,
     isError: searchMoviesError,
-  } = useMoviesBySearch(searchValue);
+  } = useMoviesBySearch(searchValue, apiPage);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setApiPage(1);
+  }, [genreArray, searchValue]);
 
   useEffect(() => {
-    const newRawMovies =
-      searchMovies?.length > 0
-        ? searchMovies
-        : genreArray.length > 0
-        ? genreFilterMovies || []
-        : nowPlayingMovies || [];
+    const activeData = searchMovies || genreFilterMovies || nowPlayingMovies;
+    const newRawMovies = activeData?.results || [];
 
     setRawMovies(newRawMovies);
-  }, [searchMovies, genreArray, genreFilterMovies, nowPlayingMovies]);
+  }, [setRawMovies, searchMovies, genreFilterMovies, nowPlayingMovies]);
 
   useEffect(() => {
     setShowMovies(rawMovies);
-  }, [rawMovies]);
+  }, [setShowMovies, rawMovies]);
 
   const isLoading =
     artificialLoading ||
@@ -93,22 +103,33 @@ export default function MovieGallery({
           rating: Math.ceil(movie.vote_average * 10) / 10,
         }))
       : isError
-      ? fallbackMovies
+      ? fallbackMovies.map((movie: TMDBMovie) => ({
+          id: movie.id.toString(),
+          title: movie.title,
+          image: `https://image.tmdb.org/t/p/w1280${movie.poster_path}`,
+          description: movie.overview,
+          rating: Math.ceil(movie.vote_average * 10) / 10,
+        }))
       : [];
+  // Get total pages from active API response
+  const activeData = searchMovies || genreFilterMovies || nowPlayingMovies;
+  const totalPages = activeData?.totalPages || 1;
 
   // Use pagination hook
   const {
     currentPage,
-    totalPages,
+    totalPages: paginationTotalPages,
     currentItems: currentMovies,
     goToPage,
   } = usePagination({
     items: mapMovies,
-    itemsPerPage: moviesPerPage,
+    totalPages,
+    currentPage: apiPage,
+    onPageChange: setApiPage,
     resetTrigger: screenSize,
   });
 
-  if (isLoading) {
+  if (isLoading || !mapMovies) {
     return <MovieGridSkeleton />;
   }
   console.log(showMovies);
@@ -126,7 +147,7 @@ export default function MovieGallery({
       {/* Fixed Pagination at Bottom */}
       <Pagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={paginationTotalPages}
         onPageChange={goToPage}
       />
     </div>

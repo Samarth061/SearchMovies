@@ -22,7 +22,7 @@ export default function FlyoutMenu({
   function filterMovieByRating(rating: number) {
     setRating(rating);
     const filteredMovies = rawMovies.filter(
-      (movie: any) => movie.vote_average >= rating
+      (movie: TMDBMovie) => movie.vote_average >= rating
     );
     setShowMovies(filteredMovies);
   }

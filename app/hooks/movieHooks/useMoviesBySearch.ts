@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { useEffect, useState } from "react";
 
-export function useMoviesBySearch(name: string) {
+export function useMoviesBySearch(name: string, page = 1) {
   const [searchTerm, setSearchTerm] = useState(name);
   const [debouncedName] = useDebounce(searchTerm, 500); // debounce 500ms
 
@@ -13,8 +13,8 @@ export function useMoviesBySearch(name: string) {
   }, [name]);
 
   const { data, error, isLoading } = useSWR(
-    debouncedName ? ["movieBySearch", debouncedName] : null,
-    () => getMovieBySearch(debouncedName)
+    debouncedName ? ["movieBySearch", debouncedName, page] : null,
+    () => getMovieBySearch(debouncedName, page)
   );
 
   return {

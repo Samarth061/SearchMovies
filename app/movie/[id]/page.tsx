@@ -39,10 +39,14 @@ export default function MoviePage({ params }: MoviePageProps) {
   // Use TMDBMovie directly
   const movie = movieDetails || (movieError && fallbackMovie) || null;
 
-  const error = movieError ? "Failed to load movie from TMDB API" : null;
+  const error = movieError
+    ? "Failed to load movie from TMDB API"
+    : _trailerError
+    ? "Failed to load trailer from TMDB API"
+    : null;
 
   // Loading state
-  if (movieLoading) {
+  if (movieLoading || _trailerLoading || !movie) {
     return <MovieDetailSkeleton />;
   }
 
@@ -64,7 +68,7 @@ export default function MoviePage({ params }: MoviePageProps) {
   }
 
   return (
-    <div className="flex-1 pt-4 pb-4 flex flex-col items-center justify-start space-y-6">
+    <div className="flex-1 pt-4 pb-4 flex flex-col items-center justify-start space-y-6 transition-opacity duration-500 ease-in opacity-0 animate-fade-in">
       {error && <ErrorMessage error={error} />}
 
       <div className="relative w-full max-w-[1440px] mx-auto aspect-[4/3] sm:aspect-[3/2] md:aspect-video">

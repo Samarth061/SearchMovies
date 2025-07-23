@@ -31,7 +31,12 @@ export async function getCurrentlyPlayingMovies(page = 1) {
   const res = await fetchFromTMDB(
     `/movie/now_playing?language=en-US&page=${page}`
   );
-  return res.results;
+  return {
+    results: res.results,
+    totalPages: res.total_pages,
+    totalResults: res.total_results,
+    currentPage: res.page
+  };
 }
 
 export async function getMovieDetails(id: number) {
@@ -43,7 +48,7 @@ export async function getMovieYoutubeTrailer(id: number) {
 
   // Filter to find a YouTube trailer
   const trailer = data.results.find(
-    (video: any) => video.site === "YouTube" && video.type === "Trailer"
+    (video: { site: string; type: string }) => video.site === "YouTube" && video.type === "Trailer"
   );
 
   return trailer?.key || null;
@@ -61,13 +66,27 @@ export async function getMovieReleaseData(id: number) {
   return fetchFromTMDB(`/movie/${id}/release_dates`);
 }
 
-export async function getMoviesByGenre(genreId: number[]) {
+export async function getMoviesByGenre(genreId: number[], page = 1) {
   const genreQuery = genreId.join(",");
-  const data = await fetchFromTMDB(`/discover/movie?with_genres=${genreQuery}`);
-  return data.results;
+  const data = await fetchFromTMDB(
+    `/discover/movie?with_genres=${genreQuery}}&page=${page}`
+  );
+  return {
+    results: data.results,
+    totalPages: data.total_pages,
+    totalResults: data.total_results,
+    currentPage: data.page
+  };
 }
 
-export async function getMovieBySearch(movieName: string) {
-  const movie = await fetchFromTMDB(`/search/movie?query=${movieName}`);
-  return movie.results;
+export async function getMovieBySearch(movieName: string, page = 1) {
+  const movie = await fetchFromTMDB(
+    `/search/movie?query=${movieName}&page=${page}`
+  );
+  return {
+    results: movie.results,
+    totalPages: movie.total_pages,
+    totalResults: movie.total_results,
+    currentPage: movie.page
+  };
 }

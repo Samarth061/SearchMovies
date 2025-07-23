@@ -16,21 +16,43 @@ interface MovieInfoCardProps {
   movie: TMDBMovie;
 }
 
-type CrewMember = {
-  job: string;
+interface CrewMember {
+  id: number;
+  credit_id: string;
   name: string;
-  [key: string]: any;
-};
+  original_name: string;
+  department: string;
+  job: string;
+  popularity: number;
+  profile_path: string | null;
+  gender: number | null;
+  adult: boolean;
+}
 
 export default function MovieInfoCard({ movie }: MovieInfoCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const { cast, crew, isLoading, isError } = useMovieCredits(movie.id);
+  const {
+    crew,
+    isLoading: isMovieCreditLoading,
+    isError: isMovieCreditError,
+  } = useMovieCredits(movie.id);
   const {
     certification,
     isLoading: isRatingLoading,
     isError: isRatingError,
   } = useMovieRating(movie.id);
+
+  const isLoading = isMovieCreditLoading || isRatingLoading;
+  const isError = isMovieCreditError || isRatingError;
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   const director: CrewMember | undefined = crew.find(
     (member: CrewMember) => member.job === "Director"

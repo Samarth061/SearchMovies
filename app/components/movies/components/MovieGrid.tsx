@@ -17,7 +17,7 @@ interface MovieGridProps {
 
 export default function MovieGrid({ movies }: MovieGridProps) {
   const { screenSize, isMobile } = useBreakpoints();
-  
+
   // Map screen sizes to Tailwind grid classes
   const getGridClass = () => {
     switch (screenSize) {
@@ -31,12 +31,14 @@ export default function MovieGrid({ movies }: MovieGridProps) {
         return "grid-cols-4";
     }
   };
-  
+
   const gridClass = getGridClass();
   const gapClass = isMobile ? "gap-4" : "gap-6";
-  
+
   return (
-    <div className={`grid ${gridClass} pt-3 ${gapClass} justify-items-center auto-rows-fr`}>
+    <div
+      className={`grid ${gridClass} pt-3 ${gapClass} justify-items-center auto-rows-fr transition-opacity duration-500 ease-in opacity-0 animate-fade-in`}
+    >
       {movies.map((movie: Movie) => (
         <MovieCard
           key={movie.id}

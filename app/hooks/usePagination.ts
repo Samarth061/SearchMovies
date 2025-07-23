@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 interface Movie {
   id: string;
@@ -11,7 +11,9 @@ interface Movie {
 
 interface UsePaginationProps {
   items: Movie[];
-  itemsPerPage: number;
+  totalPages: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
   resetTrigger?: unknown;
 }
 
@@ -24,39 +26,26 @@ interface UsePaginationReturn {
 
 export function usePagination({
   items,
-  itemsPerPage,
+  totalPages,
+  currentPage,
+  onPageChange,
   resetTrigger,
 }: UsePaginationProps): UsePaginationReturn {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Reset current page when resetTrigger changes (e.g., screen size)
+  // Reset to page 1 when resetTrigger changes (e.g., screen size, filters)
   useEffect(() => {
-    setCurrentPage(1);
-  }, [resetTrigger]);
-
-  // Calculate pagination values
-  const paginationData = useMemo(() => {
-    const totalPages = Math.ceil(items.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentItems = items.slice(startIndex, endIndex);
-
-    return {
-      totalPages,
-      currentItems,
-    };
-  }, [items, itemsPerPage, currentPage]);
+    onPageChange(1);
+  }, [resetTrigger, onPageChange]);
 
   const goToPage = (page: number) => {
-    if (page >= 1 && page <= paginationData.totalPages) {
-      setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) {
+      onPageChange(page);
     }
   };
 
   return {
     currentPage,
-    totalPages: paginationData.totalPages,
-    currentItems: paginationData.currentItems,
+    totalPages,
+    currentItems: items,
     goToPage,
   };
 }

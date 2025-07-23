@@ -2,14 +2,14 @@ import useSWR from "swr";
 import { getMoviesByGenre } from "../../lib/tmdb";
 import { useEffect, useState } from "react";
 
-export function useMoviesByGenre(ids: number[]) {
+export function useMoviesByGenre(ids: number[], page = 1) {
   const [artificialLoading, setArtificialLoading] = useState(true);
 
   const shouldFetch = ids.length > 0;
 
   const { data, error, isLoading } = useSWR(
-    shouldFetch ? ["movieGenre", ids] : null, // null prevents fetching when no genres selected
-    () => getMoviesByGenre(ids),
+    shouldFetch ? ["movieGenre", ids, page] : null, // null prevents fetching when no genres selected
+    () => getMoviesByGenre(ids, page),
     {
       revalidateOnMount: true,
       revalidateOnFocus: false,

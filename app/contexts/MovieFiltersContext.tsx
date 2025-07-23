@@ -2,8 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { TMDBMovie } from "@/app/types/TMDBmovie";
-
-interface MovieFiltersContextType {
+export interface MovieFiltersContextType {
   duration: number;
   setDuration: React.Dispatch<React.SetStateAction<number>>;
   rating: number;
@@ -12,12 +11,11 @@ interface MovieFiltersContextType {
   setRawMovies: React.Dispatch<React.SetStateAction<TMDBMovie[]>>;
   showMovies: TMDBMovie[];
   setShowMovies: React.Dispatch<React.SetStateAction<TMDBMovie[]>>;
-  genreArray: string[];
-  setGenreArray: React.Dispatch<React.SetStateAction<string[]>>;
+  genreArray: number[];
+  setGenreArray: React.Dispatch<React.SetStateAction<number[]>>;
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
-
 const MovieFiltersContext = createContext<MovieFiltersContextType | undefined>(
   undefined
 );
@@ -33,7 +31,7 @@ export function MovieFiltersProvider({ children }: MovieFiltersProviderProps) {
   const [rawMovies, setRawMovies] = useState<TMDBMovie[]>([]);
   const [showMovies, setShowMovies] = useState<TMDBMovie[]>([]);
 
-  const [genreArray, setGenreArray] = useState<string[]>([]);
+  const [genreArray, setGenreArray] = useState<number[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
   const value: MovieFiltersContextType = {

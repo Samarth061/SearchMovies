@@ -3,6 +3,19 @@ import React from "react";
 import Image from "next/image";
 import ScrollableContainer from "@/app/components/ui/ScrollableContainer";
 
+export interface ActorProps {
+  id: number;
+  name: string;
+  original_name: string;
+  character: string;
+  profile_path: string | null;
+  credit_id: string;
+  gender: number | null;
+  popularity: number;
+  known_for_department: string;
+  order: number;
+  adult: boolean;
+}
 export default function Cast({ id }: { id: number }) {
   const { cast, isLoading, isError } = useMovieCredits(id);
 
@@ -55,7 +68,7 @@ export default function Cast({ id }: { id: number }) {
         padding="px-4"
         ariaLabel="Movie cast members"
       >
-        {cast.slice(0, 8).map((actor: any) => (
+        {cast.slice(0, 8).map((actor: ActorProps) => (
           <div key={actor.id} className=" text-center flex-shrink-0">
             <div className="relative w-30 h-30 mx-auto mb-2">
               <Image

@@ -6,8 +6,6 @@ import { useMovieFilters } from "./contexts/MovieFiltersContext";
 
 export default function HomePage() {
   const {
-    duration,
-    setDuration,
     rawMovies,
     setRawMovies,
     showMovies,
@@ -30,8 +28,6 @@ export default function HomePage() {
           setGenreArray={setGenreArray}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          showMovies={showMovies}
-          setShowMovies={setShowMovies}
         />
         <MovieGallery
           rawMovies={rawMovies}

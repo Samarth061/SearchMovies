@@ -6,14 +6,18 @@ import SearchBar from "./component/SearchBar";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import { useSidebar } from "@/app/contexts/SidebarContext";
 
+interface SearchControlsProps {
+  genreArray: number[];
+  setGenreArray: React.Dispatch<React.SetStateAction<number[]>>;
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+}
 export default function SearchControls({
   genreArray,
   setGenreArray,
   searchValue,
   setSearchValue,
-  showMovies,
-  setShowMovies,
-}: any) {
+}: SearchControlsProps) {
   const { toggleSidebar } = useSidebar();
   return (
     <div className="flex items-center justify-between gap-4 py-3 lg:p-0">

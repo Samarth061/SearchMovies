@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Sidebar from "./components/layout/Sidebar";
-import { SidebarProvider, useSidebar } from "./contexts/SidebarContext";
+import { SidebarProvider } from "./contexts/SidebarContext";
 import { MovieFiltersProvider } from "./contexts/MovieFiltersContext";
 
 function LayoutClientContent({ children }: { children: React.ReactNode }) {

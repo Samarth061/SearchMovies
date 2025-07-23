@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import FlyoutMenu from "./searchControls/component/FlyoutMenu";
 import SearchBar from "./searchControls/component/SearchBar";
 import { useSidebar } from "@/app/contexts/SidebarContext";
@@ -8,18 +8,8 @@ import { useMovieFilters } from "@/app/contexts/MovieFiltersContext";
 
 export default function Sidebar() {
   const { isSidebarOpen, closeSidebar } = useSidebar();
-  const {
-    duration,
-    setDuration,
-    rating,
-    setRating,
-    rawMovies,
-    setRawMovies,
-    showMovies,
-    setShowMovies,
-    searchValue,
-    setSearchValue,
-  } = useMovieFilters();
+  const { setRating, rawMovies, setShowMovies, searchValue, setSearchValue } =
+    useMovieFilters();
 
   return (
     <>
