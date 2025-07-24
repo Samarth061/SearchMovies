@@ -143,7 +143,7 @@ export default function MovieInfoCard({ movie }: MovieInfoCardProps) {
 
               {/* Hover Hint Text */}
               <div className="absolute bottom-3 left-3 right-3 text-center">
-                <div className="bg-black/70 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="bg-black/70 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg transition-opacity duration-300">
                   <span className="text-white text-sm font-medium">
                     Hover to see details
                   </span>
