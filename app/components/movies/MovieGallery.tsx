@@ -132,7 +132,7 @@ export default function MovieGallery({
   if (isLoading || !mapMovies) {
     return <MovieGridSkeleton />;
   }
-  console.log(showMovies);
+
   return (
     <div className="h-full w-full max-w-[1440px] flex flex-col ">
       {/* API Status Message */}
