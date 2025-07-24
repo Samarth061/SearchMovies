@@ -30,7 +30,7 @@ export default function MovieGallery({
   searchValue,
 }: MovieGalleryProps) {
   const [artificialLoading, setArtificialLoading] = useState(true);
-  const [apiPage, setApiPage] = useState(1);
+  const [apiPage, setApiPage] = useState(2);
   const { screenSize } = useBreakpoints();
 
   // Simulate loading delay to show skeleton
