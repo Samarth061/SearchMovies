@@ -30,7 +30,7 @@ export default function FlyoutMenu({
   return (
     <div className="flex flex-col gap-6">
       {/* Duration Slider */}
-      <div className="w-full">
+      {/* <div className="w-full">
         <Slider
           htmlFor={"duration-slider"}
           title="Duration"
@@ -39,7 +39,7 @@ export default function FlyoutMenu({
           step={15}
           unit="min"
         />
-      </div>
+      </div> */}
 
       {/* Rating Slider */}
       <div className="w-full">
@@ -55,9 +55,9 @@ export default function FlyoutMenu({
       </div>
 
       {/* Show Movies */}
-      <div className="w-full">
+      {/* <div className="w-full">
         <ShowMovies />
-      </div>
+      </div> */}
     </div>
   );
 }

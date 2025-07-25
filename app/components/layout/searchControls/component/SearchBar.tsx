@@ -17,7 +17,6 @@ export default function SearchBar({
       <div className="relative">
         <input
           type="search"
-          id="movie-search"
           name="q"
           placeholder="Search movies..."
           autoComplete="off"
