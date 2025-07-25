@@ -2,7 +2,6 @@
 
 import React from "react";
 import Slider from "./Slider";
-import ShowMovies from "./ShowMovies";
 import { TMDBMovie } from "@/app/types/TMDBmovie";
 
 interface FlyoutMenuProps {
@@ -16,8 +15,8 @@ export default function FlyoutMenu({
   setShowMovies,
   setRating,
 }: FlyoutMenuProps) {
-  const minDuration = 60;
-  const maxDuration = 240;
+  // const minDuration = 60;
+  // const maxDuration = 240;
 
   function filterMovieByRating(rating: number) {
     setRating(rating);
